@@ -1,0 +1,22 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopGL
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+/reference:C:/Users/gandifil/.nuget/packages/monogame.extended.content.pipeline/6.0.0/tools/MonoGame.Extended.Content.Pipeline.dll
+#---------------------------------- Content ---------------------------------#
+
+#begin images/Tilemap_color3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:TextureFormat=NoChange
+/build:images/Tilemap_color3.png
+
