@@ -20,3 +20,9 @@
 /processorParam:TextureFormat=NoChange
 /build:images/Tilemap_color3.png
 
+#begin images/grass_tile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:TextureFormat=NoChange
+/build:images/grass_tile.png
+
