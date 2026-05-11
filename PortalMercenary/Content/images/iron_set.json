@@ -1,0 +1,30 @@
+{
+	"textures": [
+		{
+			"filename": "iron_set-texture.png",
+			"format": "RGBA8888",
+			"size": {"w":96,"h":50},
+			"frames": {
+				"boot_left_01":{
+					"frame": {"x":0,"y":0,"w":22,"h":49}
+				},
+				"boot_profile_01":{
+					"frame": {"x":22,"y":0,"w":36,"h":49}
+				},
+				"boot_right_01":{
+					"frame": {"x":58,"y":0,"w":19,"h":50}
+				},
+				"boot_right_back_01":{
+					"frame": {"x":77,"y":0,"w":19,"h":50}
+				}
+			}
+		}
+	],
+
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"dataformat": "monogame-extended",
+		"version": "1.2",
+		"smartupdate": "$TexturePacker:SmartUpdate:d18b708865c72c20dbb1311793ad38a5:6db52ca8b1ce8dcb06f72839d598ed7a:c1feb462a3baef071d635f66602195d6$"
+	}
+}

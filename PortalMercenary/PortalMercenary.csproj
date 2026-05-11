@@ -25,6 +25,9 @@
     <ItemGroup>
         <MonoGameContentReference Include="Content\Content.mgcb" />
     </ItemGroup>
+    <PropertyGroup>
+        <MonoGameExtendedPipelineReferencePath>$(MSBuildThisFileDirectory)pipeline-references</MonoGameExtendedPipelineReferencePath>
+    </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Contentless" Version="4.2.2" />
         <PackageReference Include="MonoGame.Extended" Version="6.0.0" />

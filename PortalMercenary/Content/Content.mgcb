@@ -14,15 +14,20 @@
 /reference:C:/Users/gandifil/.nuget/packages/monogame.extended.content.pipeline/6.0.0/tools/MonoGame.Extended.Content.Pipeline.dll
 #---------------------------------- Content ---------------------------------#
 
-#begin images/Tilemap_color3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:TextureFormat=NoChange
-/build:images/Tilemap_color3.png
-
 #begin images/grass_tile.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:TextureFormat=NoChange
 /build:images/grass_tile.png
+
+#begin images/iron_set-texture.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:TextureFormat=NoChange
+/build:images/iron_set-texture.png
+
+#begin images/iron_set.json
+/importer:TexturePackerJsonImporter
+/processor:TexturePackerProcessor
+/build:images/iron_set.json
 

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Graphics;
 using MonoGame.Extended.Particles.Modifiers.Interpolators;
+using PortalMercenary.Entities;
 
 namespace PortalMercenary;
 
@@ -19,8 +20,10 @@ public class Game1 : Game
     // be scrolling.
     private Vector2 _backgroundOffset;
     private Texture2D _backgroundPattern;
-    private Texture2DAtlas _atlas;
+    private Texture2DAtlas _ironSet;
     private Texture2D _atlasTexture2D;
+    
+    private Actor _player;
 
     public Game1()
     {
@@ -52,20 +55,30 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        _atlasTexture2D = Content.Load<Texture2D>("images/Tilemap_color3");
-        _atlas = Texture2DAtlas.Create("images/Tilemap_color3", _atlasTexture2D, 64, 64);
-
-        // Load the background pattern texture.
+        _ironSet = Content.Load<Texture2DAtlas>("images/iron_set");
         _backgroundPattern = Content.Load<Texture2D>("images/grass_tile");
+
+        _player = new Actor(_ironSet);
     }
 
     protected override void Update(GameTime gameTime)
     {
+        var keys = Keyboard.GetState();
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-            Keyboard.GetState().IsKeyDown(Keys.Escape))
+            keys.IsKeyDown(Keys.Escape))
             Exit();
+        
+        var move = Vector2.Zero;
+        if (keys.IsKeyDown(Keys.W) || keys.IsKeyDown(Keys.Up))    move.Y -= 1;
+        if (keys.IsKeyDown(Keys.S) || keys.IsKeyDown(Keys.Down))   move.Y += 1;
+        if (keys.IsKeyDown(Keys.A) || keys.IsKeyDown(Keys.Left))   move.X -= 1;
+        if (keys.IsKeyDown(Keys.D) || keys.IsKeyDown(Keys.Right))  move.X += 1;
 
-        // TODO: Add your update logic here
+        if (move != Vector2.Zero)
+        {
+            move = move.NormalizedCopy() * 50 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        }
+        _player.Update(gameTime, move);
 
         base.Update(gameTime);
     }
@@ -76,6 +89,10 @@ public class Game1 : Game
 
         _spriteBatch.Begin(samplerState: SamplerState.PointWrap);
         _spriteBatch.Draw(_backgroundPattern, GraphicsDevice.PresentationParameters.Bounds, new Rectangle(_backgroundOffset.ToPoint(), GraphicsDevice.PresentationParameters.Bounds.Size), Color.White);
+        _spriteBatch.End();
+        
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        _player.Draw(_spriteBatch, gameTime);
         _spriteBatch.End();
 
         base.Draw(gameTime);

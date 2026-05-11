@@ -11,6 +11,10 @@
     "*/Copy.*": {
       "copy": true
     },
+    "*/*set.json": {
+      "importer": "TexturePackerJsonImporter",
+      "processor": "TexturePackerProcessor"
+    },
     "*/*.json": {
       "copy": true
     },
