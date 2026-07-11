@@ -76,7 +76,7 @@ public class Game1 : Game
 
         if (move != Vector2.Zero)
         {
-            move = move.NormalizedCopy() * 50 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            move = move.NormalizedCopy() * 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
         _player.Update(gameTime, move);
 
