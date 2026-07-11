@@ -90,7 +90,7 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(new Color(32, 40, 78, 255));
 
-        _spriteBatch.Begin(samplerState: SamplerState.PointWrap);
+        _spriteBatch.Begin(samplerState: SamplerState.PointWrap);   
         _spriteBatch.Draw(_backgroundPattern, GraphicsDevice.PresentationParameters.Bounds, new Rectangle(_backgroundOffset.ToPoint(), GraphicsDevice.PresentationParameters.Bounds.Size), Color.White);
         _spriteBatch.End();
         

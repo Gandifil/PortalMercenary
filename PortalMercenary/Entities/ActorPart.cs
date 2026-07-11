@@ -10,6 +10,8 @@ public class ActorPart
     public readonly Sprite[] Sprites;
 
     public Vector2 Position { get; set; }
+    public float Rotation { get; set; }
+    public float Depth { get; set; }
     public Vector2 Shift { get; set; }
     
     public ActorPart(Actor actor, Sprite[] sprites)
@@ -20,6 +22,6 @@ public class ActorPart
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        Sprites[(int)_actor.Direction].Draw(spriteBatch, _actor.Position + Shift + Position, 0f, Vector2.One);
+        Sprites[(int)_actor.Direction].Draw(spriteBatch, _actor.Position + Shift + Position, Rotation, Vector2.One);
     }
 }
