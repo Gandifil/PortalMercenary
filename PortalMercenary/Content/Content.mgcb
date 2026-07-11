@@ -12,6 +12,8 @@
 
 
 /reference:C:/Users/gandifil/.nuget/packages/monogame.extended.content.pipeline/6.0.0/tools/MonoGame.Extended.Content.Pipeline.dll
+/reference:C:/Users/gandifil/.nuget/packages/freetexturepackerpipeline/1.0.0/lib/net6.0/FreeTexturePackerPipeline.dll
+/reference:C:/Users/gandifil/.nuget/packages/freetexturepackerreader/1.0.0/lib/net6.0/FreeTexturePackerReader.dll
 #---------------------------------- Content ---------------------------------#
 
 #begin images/grass_tile.png
@@ -20,13 +22,14 @@
 /processorParam:TextureFormat=NoChange
 /build:images/grass_tile.png
 
-#begin images/iron_set-texture.png
+#begin images/viking.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:TextureFormat=NoChange
-/build:images/iron_set-texture.png
+/build:images/viking.png
 
-#begin images/iron_set.json
-/importer:TexturePackerJsonImporter
-/processor:TexturePackerProcessor
-/build:images/iron_set.json
+#begin images/viking.spritesheet
+/importer:SpriteSheetImporter
+/processor:SpriteSheetProcessor
+/build:images/viking.spritesheet
+

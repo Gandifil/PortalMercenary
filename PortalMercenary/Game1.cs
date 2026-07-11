@@ -1,10 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Graphics;
 using MonoGame.Extended.Particles.Modifiers.Interpolators;
 using PortalMercenary.Entities;
+using FreeTexturePackerReader;
+using PortalMercenary.Extensions;
 
 namespace PortalMercenary;
 
@@ -50,12 +53,12 @@ public class Game1 : Game
 
         base.Initialize();
     }
-
+    
     protected override void LoadContent()
-    {
+    { 
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        _ironSet = Content.Load<Texture2DAtlas>("images/iron_set");
+        _ironSet = Content.Load<FreeTexturePackerReader.SpriteSheet>("images/viking").ToTexture2DAtlas();
         _backgroundPattern = Content.Load<Texture2D>("images/grass_tile");
 
         _player = new Actor(_ironSet);

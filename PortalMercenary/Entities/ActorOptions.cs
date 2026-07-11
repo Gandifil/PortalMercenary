@@ -4,7 +4,7 @@ public class ActorOptions
 {
     public int Speed = 6;
 
-    public int StepWidth = 20;
+    public int StepWidth = 10;
     
     public int StepHeight = 3;
 

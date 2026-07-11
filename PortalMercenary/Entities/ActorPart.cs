@@ -7,7 +7,7 @@ namespace PortalMercenary.Entities;
 public class ActorPart
 {
     private readonly Actor _actor;
-    public readonly Sprite[] Sprites = new Sprite[4];
+    public readonly Sprite[] Sprites;
 
     public Vector2 Position { get; set; }
     public Vector2 Shift { get; set; }
@@ -20,6 +20,6 @@ public class ActorPart
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        Sprites[(int)_actor.Direction].Draw(spriteBatch, _actor.Position + Shift + Position, 0f, Vector2.One * .25f);
+        Sprites[(int)_actor.Direction].Draw(spriteBatch, _actor.Position + Shift + Position, 0f, Vector2.One);
     }
 }

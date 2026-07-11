@@ -6,7 +6,7 @@
     "Tiled/*.png"
   ],
   "logSkipped": true,
-  "references": ["MonoGame.Extended.Content.Pipeline"],
+  "references": ["MonoGame.Extended.Content.Pipeline", "FreeTexturePackerPipeline", "FreeTexturePackerReader"],
   "overrides": {
     "*/Copy.*": {
       "copy": true
