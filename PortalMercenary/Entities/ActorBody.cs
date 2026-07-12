@@ -5,11 +5,13 @@ namespace PortalMercenary.Entities;
 
 public class ActorBody
 {
+    public Actor Actor { get; }
     public readonly ActorPart[] Parts, Legs;
     public readonly ActorPart Head, Body, Weapon;
     
     public ActorBody(Actor actor, Texture2DAtlas textureAtlas)
     {
+        Actor = actor;
         Parts = new ActorPart[5];
         Legs = new ActorPart[2];
 

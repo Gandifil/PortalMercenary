@@ -7,6 +7,7 @@ using MonoGame.Extended.Graphics;
 using MonoGame.Extended.Particles.Modifiers.Interpolators;
 using PortalMercenary.Entities;
 using FreeTexturePackerReader;
+using PortalMercenary.Entities.Animations;
 using PortalMercenary.Extensions;
 
 namespace PortalMercenary;
@@ -76,6 +77,12 @@ public class Game1 : Game
         if (keys.IsKeyDown(Keys.S) || keys.IsKeyDown(Keys.Down))   move.Y += 1;
         if (keys.IsKeyDown(Keys.A) || keys.IsKeyDown(Keys.Left))   move.X -= 1;
         if (keys.IsKeyDown(Keys.D) || keys.IsKeyDown(Keys.Right))  move.X += 1;
+        
+        if (keys.IsKeyDown(Keys.Space)) 
+            _player.Start(new AttackAnimation()
+            {
+                MaxTime = .3f,
+            });
 
         if (move != Vector2.Zero)
         {

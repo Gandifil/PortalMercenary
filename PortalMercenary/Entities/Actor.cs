@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Graphics;
+using PortalMercenary.Entities.Animations;
 
 namespace PortalMercenary.Entities;
 
@@ -27,6 +28,15 @@ public class Actor
     
     public void Update(GameTime gameTime, Vector2 shift)
     {
+        if (_animation?.IsFinished ?? false)
+            _animation = null;
+        
+        if (_animation is not null)
+        {
+            _animation.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            return;
+        }
+        
         if (shift == Vector2.Zero)
             return;
 
@@ -70,5 +80,16 @@ public class Actor
         spriteBatch.DrawCircle(Position, 5, 16, Color.Red);
         foreach (var part in _body.Parts.OrderBy(x => x.Depth))
             part.Draw(spriteBatch);
+    }
+    
+    private ActorAnimation _animation;
+
+    public void Start(AttackAnimation attackAnimation)
+    {
+        if (_animation is null)
+        {
+            _animation = attackAnimation;
+            _animation.Start(_body);
+        }
     }
 }
