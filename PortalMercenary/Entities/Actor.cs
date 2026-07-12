@@ -26,14 +26,14 @@ public class Actor
         _body = new ActorBody(this, textureAtlas);
     }
     
-    public void Update(GameTime gameTime, Vector2 shift)
+    public void Update(float dt, Vector2 shift)
     {
         if (_animation?.IsFinished ?? false)
             _animation = null;
         
         if (_animation is not null)
         {
-            _animation.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            _animation.Update(dt);
             return;
         }
         
@@ -52,8 +52,8 @@ public class Actor
         
         Position += Shift;
         
-        var dt = (float)gameTime.ElapsedGameTime.TotalSeconds * Options.Speed;
-        _t += shift.X > 0 ? dt: -dt; // по или против часовой стрелки
+        var t = dt * Options.Speed;
+        _t += shift.X > 0 ? t: -t; // по или против часовой стрелки
         var pos = new Vector2(Options.StepHeight * MathF.Cos(_t), Options.StepWidth * MathF.Sin(_t));
 
         pos.Rotate(shift.ToAngle());
@@ -75,7 +75,7 @@ public class Actor
         _body.Weapon.Rotation = radians - MathF.PI / 2;
     }
 
-    public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+    public void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.DrawCircle(Position, 5, 16, Color.Red);
         foreach (var part in _body.Parts.OrderBy(x => x.Depth))

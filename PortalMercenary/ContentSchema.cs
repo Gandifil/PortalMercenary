@@ -7,4 +7,5 @@ namespace PortalMercenary;
 public class ContentSchema(ContentManager contentManager)
 {
     public readonly JsonFolder<CharacterOptions> Characters = new(contentManager, "characters/");
+    public readonly Folder<FreeTexturePackerReader.SpriteSheet> Spritesheets = new(contentManager, "images/");
 }

@@ -11,7 +11,7 @@
 #-------------------------------- References --------------------------------#
 
 
-/reference:C:/Users/gandifil/.nuget/packages/monogame.extended.content.pipeline/6.0.0/tools/MonoGame.Extended.Content.Pipeline.dll
+/reference:C:/Users/gandifil/.nuget/packages/monogame.extended.content.pipeline/6.0.1/tools/MonoGame.Extended.Content.Pipeline.dll
 /reference:C:/Users/gandifil/.nuget/packages/freetexturepackerpipeline/1.0.0/lib/net6.0/FreeTexturePackerPipeline.dll
 /reference:C:/Users/gandifil/.nuget/packages/freetexturepackerreader/1.0.0/lib/net6.0/FreeTexturePackerReader.dll
 #---------------------------------- Content ---------------------------------#
@@ -32,4 +32,7 @@
 /importer:SpriteSheetImporter
 /processor:SpriteSheetProcessor
 /build:images/viking.spritesheet
+
+#begin characters/player.json
+/copy:characters/player.json
 
