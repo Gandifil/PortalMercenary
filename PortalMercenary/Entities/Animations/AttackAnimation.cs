@@ -13,6 +13,10 @@ public class AttackAnimation: ActorAnimation
 
     private const float Range = MathF.PI / 3;
     private const float Radius = 50f;
+
+    private bool _hasReachedHalf;
+    public event EventHandler ReachedHalf;
+    public event EventHandler Finished;
     
     public override void Start(ActorBody actorBody)
     {
@@ -25,8 +29,16 @@ public class AttackAnimation: ActorAnimation
     public override void Update(float dt)
     {
         base.Update(dt);
+        
 
-        var currentAngle = MathHelper.Lerp(-Range, Range, _dt / MaxTime);
+        var progress = _dt / Duration;
+        if (!_hasReachedHalf && progress > 0.5f)
+        {
+            _hasReachedHalf = true;
+            ReachedHalf?.Invoke(this, EventArgs.Empty);
+        }
+        
+        var currentAngle = MathHelper.Lerp(-Range, Range, progress);
         var pos = Radius * new Vector2(0, -1);
         pos.Rotate(_actorBody.Actor.Shift.ToAngle() + currentAngle);
         _weapon.Position = pos;
@@ -37,5 +49,6 @@ public class AttackAnimation: ActorAnimation
     {
         _weapon.Position = _backupPosition;
         _weapon.Rotation = _backupRotation;
+        Finished?.Invoke(this, EventArgs.Empty);
     }
 }

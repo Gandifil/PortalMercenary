@@ -2,7 +2,7 @@ namespace PortalMercenary.Entities.Animations;
 
 public abstract class ActorAnimation
 {
-    public required float MaxTime { get; init; }
+    public required float Duration { get; init; }
 
     public bool IsFinished { get; private set; }
 
@@ -14,7 +14,7 @@ public abstract class ActorAnimation
     {
         _dt += dt;
 
-        if (_dt >= MaxTime)
+        if (_dt >= Duration)
         {
             IsFinished = true;
             Finish();

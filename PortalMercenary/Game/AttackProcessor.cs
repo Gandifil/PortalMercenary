@@ -28,19 +28,27 @@ public class AttackProcessor
         var localPosition = new Vector2(1, 0) * 60f;
         localPosition.Rotate(rotation);
         var globalPosition = actor.Position + localPosition;
-        
-        actor.Start(new AttackAnimation()
+
+        var anim = new AttackAnimation()
         {
-            MaxTime = _options.ActorAnimationDuration,
-        });
+            Duration = _options.ActorAnimationDuration,
+        };
+        anim.ReachedHalf += AnimOnReachedHalf;
+        
+        void AnimOnReachedHalf(object sender, EventArgs e)
+        {
+            ((AttackAnimation)sender).ReachedHalf -= AnimOnReachedHalf;
+            var collActor = new StrikeCollisionActor(globalPosition);
+            G.Game.CollisionWorld.Insert(collActor);
+            foreach (var collision in G.Game.CollisionWorld.QueryCollisions(collActor, null))
+                if (collision.Other is Character other && other != attacker)
+                    other.Damage(localPosition / 2);
+            G.Game.CollisionWorld.Remove(collActor);
+        }
+        
+        actor.Start(anim);
         G.Game.Animations.Spawn(_contentSpritesheet, "Attack", globalPosition, rotation);
         _contentSound.Play();
-        var collActor = new StrikeCollisionActor(globalPosition);
-        
-        G.Game.CollisionWorld.Insert(collActor);
-        foreach (var collision in G.Game.CollisionWorld.QueryCollisions(collActor, null))
-            if (collision.Other is Character other && other != attacker)
-                other.Damage(localPosition / 2);
-        G.Game.CollisionWorld.Remove(collActor);
     }
+
 }
