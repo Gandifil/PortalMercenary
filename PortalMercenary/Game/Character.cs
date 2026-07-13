@@ -15,7 +15,8 @@ public class Character
     public Actor Actor { get; set; }
 
     public required ICharacterController Controller { get; init; }
-    
+    public Vector2 Position => Actor.Position;
+
     public Character(Vector2 position, CharacterOptions options)
     {
         _options = options;

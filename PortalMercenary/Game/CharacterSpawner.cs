@@ -9,6 +9,7 @@ public class CharacterSpawner
     private Vector2 _position = Vector2.Zero;
     private ICharacterController _controller = null!;
     private string _characterKey = string.Empty;
+    private Character _character;
 
     public CharacterSpawner(CharacterManager characterManager)
     {
@@ -45,9 +46,11 @@ public class CharacterSpawner
         {
             Controller = _controller
         };
-        _characterManager.Add(character);
+        _character = _characterManager.Add(character);
         return this;
     }
 
     public CharacterSpawner Spawn(string key) => WithKey(key).Spawn();
+
+    public Character Last() => _character;
 }

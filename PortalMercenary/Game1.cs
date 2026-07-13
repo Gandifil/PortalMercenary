@@ -12,6 +12,7 @@ public class Game1 : Microsoft.Xna.Framework.Game
     private GraphicsDeviceManager _graphics;
     public SpriteBatch SpriteBatch  { get; private set; }
     public CharacterManager CharacterManager { get; private set; }
+    public Character Player { get; private set; }
     public TempAnimatedSpriteComponent Animations { get; private set; }
     
     // The offset to apply when drawing the background pattern so it appears to
@@ -45,13 +46,17 @@ public class Game1 : Microsoft.Xna.Framework.Game
     protected override void LoadContent()
     { 
         _backgroundPattern = Content.Load<Texture2D>("images/grass_tile");
-        CharacterManager.GetSpawner()
+        Player = CharacterManager.GetSpawner()
+            .MovePosition(new Vector2(100, 100))
+            .WithController(new DollController())
+            .Spawn("player")
+            .MovePosition(new Vector2(100, 100))
+            .WithController(new AiController())
+            .Spawn("player")
             .MovePosition(new Vector2(100, 100))
             .WithController(new PlayerController())
             .Spawn("player")
-            .MovePosition(new Vector2(100, 100))
-            .WithController(new DollController())
-            .Spawn("player");
+            .Last();
     }
 
     protected override void Update(GameTime gameTime)
