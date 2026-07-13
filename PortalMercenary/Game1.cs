@@ -45,10 +45,10 @@ public class Game1 : Microsoft.Xna.Framework.Game
     protected override void LoadContent()
     { 
         _backgroundPattern = Content.Load<Texture2D>("images/grass_tile");
-        CharacterManager.Spawn(new Character(new Vector2(100, 100), G.Content.Characters["player"])
-        {
-            Controller = new PlayerController(),
-        });
+        CharacterManager.GetSpawner()
+            .MovePosition(new Vector2(100, 100))
+            .WithController(new PlayerController())
+            .Spawn("player");
     }
 
     protected override void Update(GameTime gameTime)

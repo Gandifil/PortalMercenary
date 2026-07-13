@@ -15,17 +15,9 @@ public class CharacterManager: SimpleDrawableGameComponent
         _game = game;
     }
 
-    public Character Spawn(string key)
-    {
-        var character = new Character(Vector2.Zero, G.Content.Characters[key])
-        {
-            Controller = new PlayerController(),
-        };
-        _characters.Add(character);
-        return character;
-    }
+    public CharacterSpawner GetSpawner() => new (this);
 
-    public Character Spawn(Character character)
+    public Character Add(Character character)
     {
         _characters.Add(character);
         return character;
