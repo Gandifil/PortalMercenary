@@ -22,6 +22,10 @@
       "importer": "OggImporter",
       "processor": "SongProcessor"
     },
+    "sounds/*.wav": {
+      "importer": "WavImporter",
+      "processor": "SoundEffectProcessor"
+    },
     "*/*.png": {
       "processorParams": {
         "TextureFormat": "NoChange"

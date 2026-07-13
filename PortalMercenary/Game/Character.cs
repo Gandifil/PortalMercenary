@@ -37,13 +37,17 @@ public class Character
 
     public void Attack()
     {
-        Actor.Start(new AttackAnimation()
+        if (Actor.IsFree)
         {
-            MaxTime = _options.Attack.ActorAnimationDuration,
-        });
-        var rotation = Actor.Shift.ToAngle() - MathF.PI / 2;
-        var pos = new Vector2(1, 0) * 60f;
-        pos.Rotate(rotation);
-        G.Game.Animations.Spawn(G.Content.Spritesheets["viking"], "Attack", Actor.Position + pos, rotation);
+            Actor.Start(new AttackAnimation()
+            {
+                MaxTime = _options.Attack.ActorAnimationDuration,
+            });
+            var rotation = Actor.Shift.ToAngle() - MathF.PI / 2;
+            var pos = new Vector2(1, 0) * 60f;
+            pos.Rotate(rotation);
+            G.Game.Animations.Spawn(G.Content.Spritesheets["viking"], "Attack", Actor.Position + pos, rotation);
+            G.Content.Sounds["swing3"].Play();
+        }
     }
 }

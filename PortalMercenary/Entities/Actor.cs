@@ -84,9 +84,11 @@ public class Actor
     
     private ActorAnimation _animation;
 
+    public bool IsFree => _animation is null;
+
     public void Start(AttackAnimation attackAnimation)
     {
-        if (_animation is null)
+        if (IsFree)
         {
             _animation = attackAnimation;
             _animation.Start(_body);

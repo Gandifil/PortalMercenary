@@ -39,3 +39,8 @@
 #begin images/viking.json
 /copy:images/viking.json
 
+#begin sounds/swing3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/build:sounds/swing3.wav
+
