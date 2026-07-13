@@ -48,6 +48,9 @@ public class Game1 : Microsoft.Xna.Framework.Game
         CharacterManager.GetSpawner()
             .MovePosition(new Vector2(100, 100))
             .WithController(new PlayerController())
+            .Spawn("player")
+            .MovePosition(new Vector2(100, 100))
+            .WithController(new DollController())
             .Spawn("player");
     }
 
