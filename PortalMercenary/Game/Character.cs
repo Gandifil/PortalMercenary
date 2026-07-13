@@ -66,6 +66,7 @@ public class Character: ICollisionActor
                 duration: .1f, 
                 delay: 0)
             .Easing(EasingFunctions.ElasticOut);
+        G.Game.DecalsComponent.Add(Position);
     }
 
     public int Id { get; }

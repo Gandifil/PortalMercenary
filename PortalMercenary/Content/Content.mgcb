@@ -44,3 +44,9 @@
 /processor:SoundEffectProcessor
 /build:sounds/swing3.wav
 
+#begin images/blood.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:TextureFormat=NoChange
+/build:images/blood.png
+
