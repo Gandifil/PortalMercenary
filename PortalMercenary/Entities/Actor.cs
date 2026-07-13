@@ -49,7 +49,7 @@ public class Actor
             Direction =  Direction.Right;
         else if (Shift.X < 0)
             Direction =  Direction.Left;
-        
+
         Position += Shift * 100 * dt;
         
         var t = dt * Options.Speed;

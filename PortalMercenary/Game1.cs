@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
+using MonoGame.Extended.Collisions.Layers;
 using PortalMercenary.Animation;
 using PortalMercenary.Game;
 using PortalMercenary.Game.Controllers;
@@ -12,6 +15,8 @@ public class Game1 : Microsoft.Xna.Framework.Game
     private GraphicsDeviceManager _graphics;
     public SpriteBatch SpriteBatch  { get; private set; }
     public CharacterManager CharacterManager { get; private set; }
+
+    public CollisionWorld2D CollisionWorld { get; private set; }
     public Character Player { get; private set; }
     public TempAnimatedSpriteComponent Animations { get; private set; }
     
@@ -39,10 +44,12 @@ public class Game1 : Microsoft.Xna.Framework.Game
 
         Components.Add(CharacterManager = new CharacterManager(this));
         Components.Add(Animations = new TempAnimatedSpriteComponent(this));
+        
+        CollisionWorld = new CollisionWorld2D(new Layer(new SpatialHash(new SizeF(128f, 128f))));
         G.Init(this);
         base.Initialize();
     }
-    
+
     protected override void LoadContent()
     { 
         _backgroundPattern = Content.Load<Texture2D>("images/grass_tile");

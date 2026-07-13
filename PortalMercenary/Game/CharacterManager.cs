@@ -20,6 +20,7 @@ public class CharacterManager: SimpleDrawableGameComponent
     public Character Add(Character character)
     {
         _characters.Add(character);
+        G.Game.CollisionWorld.Insert(character);
         return character;
     }
     
@@ -28,6 +29,8 @@ public class CharacterManager: SimpleDrawableGameComponent
         var dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
         foreach (var character in _characters)
             character.Update(dt);
+        
+        G.Game.CollisionWorld.RebuildDynamicLayers();
     }
 
     public override void Draw(GameTime gameTime)

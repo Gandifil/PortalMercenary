@@ -1,7 +1,9 @@
 using System;
+using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
 using PortalMercenary.Entities;
 using PortalMercenary.Entities.Animations;
 using PortalMercenary.Extensions;
@@ -9,7 +11,7 @@ using PortalMercenary.Game.Controllers;
 
 namespace PortalMercenary.Game;
 
-public class Character
+public class Character: ICollisionActor
 {
     private readonly CharacterOptions _options;
     public Actor Actor { get; set; }
@@ -19,6 +21,7 @@ public class Character
 
     public Character(Vector2 position, CharacterOptions options)
     {
+        Id = GetHashCode();
         _options = options;
         Actor = new Actor(G.Content.FreeTexPackerSpritesheets[options.Atlas].ToTexture2DAtlas())
         {
@@ -28,8 +31,14 @@ public class Character
 
     public void Update(float dt)
     {
+        var oldPosition = Actor.Position;
         Controller.Update(this, dt);
         Actor.Update(dt);
+        
+        foreach (var collision in G.Game.CollisionWorld.QueryCollisions(this, null))
+        {
+            Actor.Position = oldPosition;
+        }
     }
 
     public void Draw(SpriteBatch gameSpriteBatch)
@@ -50,6 +59,17 @@ public class Character
             pos.Rotate(rotation);
             G.Game.Animations.Spawn(G.Content.Spritesheets["viking"], "Attack", Actor.Position + pos, rotation);
             G.Content.Sounds["swing3"].Play();
+        }
+    }
+
+    public int Id { get; }
+
+    public CollisionShape2D Shape
+    {
+        get
+        {
+            var bounds = new BoundingCircle2D(Position, 20);
+            return new CollisionShape2D(bounds);
         }
     }
 }
