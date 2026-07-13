@@ -35,7 +35,7 @@ public class Game1 : Microsoft.Xna.Framework.Game
         _graphics.PreferredBackBufferHeight = 450;
         _graphics.ApplyChanges();
         Content.RootDirectory = "Content";
-        Window.Title = "Portal Mercenary";
+        Window.Title = "Викинги: Кровь на Траве";
         Window.AllowUserResizing = true;
         IsMouseVisible = true;
     }
