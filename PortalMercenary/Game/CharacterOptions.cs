@@ -9,5 +9,7 @@ public class CharacterOptions
     public class AttackOptions
     {
         public float ActorAnimationDuration { get; set; }
+        public string SpriteSheet { get; set; }
+        public string Sound { get; set; }
     }
 }

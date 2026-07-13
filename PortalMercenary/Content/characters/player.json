@@ -1,6 +1,8 @@
 {
   "atlas": "viking",
   "attack": {
-    "actorAnimationDuration": 0.3
+    "actorAnimationDuration": 0.3,
+    "spriteSheet": "viking",
+    "sound": "swing3"
   }
 }

@@ -1,5 +1,5 @@
 using System;
-using System.Runtime.CompilerServices;
+using System.Collections.Specialized;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -14,6 +14,7 @@ namespace PortalMercenary.Game;
 public class Character: ICollisionActor
 {
     private readonly CharacterOptions _options;
+    private readonly AttackProcessor _attackProcessor;
     public Actor Actor { get; set; }
 
     public required ICharacterController Controller { get; init; }
@@ -23,6 +24,7 @@ public class Character: ICollisionActor
     {
         Id = GetHashCode();
         _options = options;
+        _attackProcessor = new AttackProcessor(options.Attack);
         Actor = new Actor(G.Content.FreeTexPackerSpritesheets[options.Atlas].ToTexture2DAtlas())
         {
             Position = position
@@ -50,16 +52,13 @@ public class Character: ICollisionActor
     {
         if (Actor.IsFree)
         {
-            Actor.Start(new AttackAnimation()
-            {
-                MaxTime = _options.Attack.ActorAnimationDuration,
-            });
-            var rotation = Actor.Shift.ToAngle() - MathF.PI / 2;
-            var pos = new Vector2(1, 0) * 60f;
-            pos.Rotate(rotation);
-            G.Game.Animations.Spawn(G.Content.Spritesheets["viking"], "Attack", Actor.Position + pos, rotation);
-            G.Content.Sounds["swing3"].Play();
+            _attackProcessor.Execute(this);
         }
+    }
+
+    public void Damage(Vector2 pos)
+    {
+        Actor.Position += pos;
     }
 
     public int Id { get; }
