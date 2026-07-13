@@ -16,8 +16,9 @@ public class Actor
 
     public ActorOptions Options { get; set; } = new();
 
-    public Direction Direction { get; set; }
+    public Direction Direction { get; private set; }
     public Vector2 Shift { get; set; }
+    //public Vector2 ControlShift { get; set; } = Vector2.Zero;
 
     private float _t; 
     
@@ -26,7 +27,7 @@ public class Actor
         _body = new ActorBody(this, textureAtlas);
     }
     
-    public void Update(float dt, Vector2 shift)
+    public void Update(float dt)
     {
         if (_animation?.IsFinished ?? false)
             _animation = null;
@@ -37,26 +38,25 @@ public class Actor
             return;
         }
         
-        if (shift == Vector2.Zero)
+        if (Shift == Vector2.Zero)
             return;
 
-        Shift = shift;
-        if (shift.Y > 0)
+        if (Shift.Y > 0)
             Direction =  Direction.Down;
-        else if (shift.Y < 0)
+        else if (Shift.Y < 0)
             Direction =  Direction.Up;
-        else if (shift.X > 0)
+        else if (Shift.X > 0)
             Direction =  Direction.Right;
-        else if (shift.X < 0)
+        else if (Shift.X < 0)
             Direction =  Direction.Left;
         
-        Position += Shift;
+        Position += Shift * 100 * dt;
         
         var t = dt * Options.Speed;
-        _t += shift.X > 0 ? t: -t; // по или против часовой стрелки
+        _t += Shift.X > 0 ? t: -t; // по или против часовой стрелки
         var pos = new Vector2(Options.StepHeight * MathF.Cos(_t), Options.StepWidth * MathF.Sin(_t));
 
-        pos.Rotate(shift.ToAngle());
+        pos.Rotate(Shift.ToAngle());
         _body.Legs[0].Position = pos;
         _body.Legs[1].Position = -pos;
         _body.Body.Position = new Vector2(0, Options.StepHeight * (float)Math.Sin(_t));

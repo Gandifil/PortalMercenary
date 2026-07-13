@@ -2,7 +2,6 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using MonoGame.Extended.Graphics;
 using PortalMercenary.Entities;
 using PortalMercenary.Entities.Animations;
 using PortalMercenary.Extensions;
@@ -15,19 +14,21 @@ public class Character
     private readonly CharacterOptions _options;
     public Actor Actor { get; set; }
 
-    public PlayerController CharacterController { get; set; }
+    public required ICharacterController Controller { get; init; }
     
-    public Character(CharacterOptions options)
+    public Character(Vector2 position, CharacterOptions options)
     {
         _options = options;
-        var atlas = G.Content.FreeTexPackerSpritesheets[options.Atlas].ToTexture2DAtlas();
-        Actor = new Actor(atlas);
-        CharacterController  = new PlayerController(this);
+        Actor = new Actor(G.Content.FreeTexPackerSpritesheets[options.Atlas].ToTexture2DAtlas())
+        {
+            Position = position
+        };
     }
 
     public void Update(float dt)
     {
-        Actor.Update(dt, CharacterController.Update(dt));
+        Controller.Update(this, dt);
+        Actor.Update(dt);
     }
 
     public void Draw(SpriteBatch gameSpriteBatch)

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PortalMercenary.Animation;
 using PortalMercenary.Game;
+using PortalMercenary.Game.Controllers;
 
 namespace PortalMercenary;
 
@@ -44,7 +45,10 @@ public class Game1 : Microsoft.Xna.Framework.Game
     protected override void LoadContent()
     { 
         _backgroundPattern = Content.Load<Texture2D>("images/grass_tile");
-        CharacterManager.Spawn("player");
+        CharacterManager.Spawn(new Character(new Vector2(100, 100), G.Content.Characters["player"])
+        {
+            Controller = new PlayerController(),
+        });
     }
 
     protected override void Update(GameTime gameTime)

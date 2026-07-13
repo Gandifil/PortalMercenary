@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
+using PortalMercenary.Game.Controllers;
 
 namespace PortalMercenary.Game;
 
@@ -16,7 +17,16 @@ public class CharacterManager: SimpleDrawableGameComponent
 
     public Character Spawn(string key)
     {
-        var character = new Character(G.Content.Characters[key]);
+        var character = new Character(Vector2.Zero, G.Content.Characters[key])
+        {
+            Controller = new PlayerController(),
+        };
+        _characters.Add(character);
+        return character;
+    }
+
+    public Character Spawn(Character character)
+    {
         _characters.Add(character);
         return character;
     }
