@@ -1,5 +1,6 @@
 {
   "atlas": "viking",
+  "damageSounds": ["ogre/ogre1", "ogre/ogre2", "ogre/ogre3", "ogre/ogre4", "ogre/ogre5"],
   "attack": {
     "actorAnimationDuration": 0.3,
     "spriteSheet": "viking",

@@ -67,6 +67,7 @@ public class Character: ICollisionActor
                 delay: 0)
             .Easing(EasingFunctions.ElasticOut);
         G.Game.DecalsComponent.Add(Position);
+        G.Content.Sounds[_options.DamageSounds[Random.Shared.Next(_options.DamageSounds.Length)]].Play();
     }
 
     public int Id { get; }

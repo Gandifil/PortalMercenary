@@ -5,6 +5,8 @@ public class CharacterOptions
     public string Atlas { get; set; }
 
     public AttackOptions Attack { get; set; }
+    
+    public string[] DamageSounds { get; set; }
 
     public class AttackOptions
     {

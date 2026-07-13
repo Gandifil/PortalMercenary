@@ -50,3 +50,28 @@
 /processorParam:TextureFormat=NoChange
 /build:images/blood.png
 
+#begin sounds/ogre/ogre1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/build:sounds/ogre/ogre1.wav
+
+#begin sounds/ogre/ogre2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/build:sounds/ogre/ogre2.wav
+
+#begin sounds/ogre/ogre3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/build:sounds/ogre/ogre3.wav
+
+#begin sounds/ogre/ogre4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/build:sounds/ogre/ogre4.wav
+
+#begin sounds/ogre/ogre5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/build:sounds/ogre/ogre5.wav
+
