@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
+using MonoGame.Extended.Tweening;
 using PortalMercenary.Entities;
 using PortalMercenary.Entities.Animations;
 using PortalMercenary.Extensions;
@@ -58,7 +59,13 @@ public class Character: ICollisionActor
 
     public void Damage(Vector2 pos)
     {
-        Actor.Position += pos;
+        G.Tweener.TweenTo(
+                target: Actor, 
+                expression: x => x.Position, 
+                toValue: Actor.Position + pos, 
+                duration: .1f, 
+                delay: 0)
+            .Easing(EasingFunctions.ElasticOut);
     }
 
     public int Id { get; }

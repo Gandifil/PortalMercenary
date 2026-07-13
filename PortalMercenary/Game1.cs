@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using MonoGame.Extended.Collisions.Layers;
+using MonoGame.Extended.Tweening;
 using PortalMercenary.Animation;
 using PortalMercenary.Game;
 using PortalMercenary.Game.Controllers;
@@ -44,7 +45,6 @@ public class Game1 : Microsoft.Xna.Framework.Game
 
         Components.Add(CharacterManager = new CharacterManager(this));
         Components.Add(Animations = new TempAnimatedSpriteComponent(this));
-        
         CollisionWorld = new CollisionWorld2D(new Layer(new SpatialHash(new SizeF(128f, 128f))));
         G.Init(this);
         base.Initialize();
@@ -73,6 +73,7 @@ public class Game1 : Microsoft.Xna.Framework.Game
             keys.IsKeyDown(Keys.Escape))
             Exit();
 
+        G.Tweener.Update(gameTime.GetElapsedSeconds());
         base.Update(gameTime);
     }
 

@@ -42,7 +42,7 @@ public class AttackProcessor
             G.Game.CollisionWorld.Insert(collActor);
             foreach (var collision in G.Game.CollisionWorld.QueryCollisions(collActor, null))
                 if (collision.Other is Character other && other != attacker)
-                    other.Damage(localPosition / 2);
+                    other.Damage(localPosition);
             G.Game.CollisionWorld.Remove(collActor);
         }
         
