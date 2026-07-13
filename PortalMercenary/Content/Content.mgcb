@@ -36,3 +36,6 @@
 #begin characters/player.json
 /copy:characters/player.json
 
+#begin images/viking.json
+/copy:images/viking.json
+

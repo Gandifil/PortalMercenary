@@ -1,3 +1,6 @@
 {
-  "atlas": "viking"
+  "atlas": "viking",
+  "attack": {
+    "actorAnimationDuration": 0.3
+  }
 }

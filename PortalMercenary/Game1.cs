@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PortalMercenary.Animation;
 using PortalMercenary.Game;
 
 namespace PortalMercenary;
@@ -10,6 +11,7 @@ public class Game1 : Microsoft.Xna.Framework.Game
     private GraphicsDeviceManager _graphics;
     public SpriteBatch SpriteBatch  { get; private set; }
     public CharacterManager CharacterManager { get; private set; }
+    public TempAnimatedSpriteComponent Animations { get; private set; }
     
     // The offset to apply when drawing the background pattern so it appears to
     // be scrolling.
@@ -34,6 +36,7 @@ public class Game1 : Microsoft.Xna.Framework.Game
         SpriteBatch = new SpriteBatch(GraphicsDevice);
 
         Components.Add(CharacterManager = new CharacterManager(this));
+        Components.Add(Animations = new TempAnimatedSpriteComponent(this));
         G.Init(this);
         base.Initialize();
     }
