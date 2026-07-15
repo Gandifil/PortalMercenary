@@ -43,4 +43,7 @@
     <ItemGroup>
       <Folder Include="Content\sounds\" />
     </ItemGroup>
+    <ItemGroup>
+      <ClCompile Include="Content\effects\cutEffect.fx" />
+    </ItemGroup>
 </Project>

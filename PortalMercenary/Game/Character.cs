@@ -68,6 +68,8 @@ public class Character: ICollisionActor
             .Easing(EasingFunctions.ElasticOut);
         G.Game.DecalsComponent.Add(Position);
         G.Content.Sounds[_options.DamageSounds[Random.Shared.Next(_options.DamageSounds.Length)]].Play();
+
+        Actor.CutAnything();
     }
 
     public int Id { get; }

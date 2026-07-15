@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Graphics;
 using PortalMercenary.Entities.Animations;
+using PortalMercenary.Graphics;
 
 namespace PortalMercenary.Entities;
 
@@ -77,7 +78,6 @@ public class Actor
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.DrawCircle(Position, 5, 16, Color.Red);
         foreach (var part in _body.Parts.OrderBy(x => x.Depth))
             part.Draw(spriteBatch);
     }
@@ -92,6 +92,20 @@ public class Actor
         {
             _animation = attackAnimation;
             _animation.Start(_body);
+        }
+    }
+
+    public void CutAnything()
+    {
+        var parts = _body.Parts.ToArray();
+        Random.Shared.Shuffle(parts);
+        foreach (var part in parts)
+        {
+            if (part != _body.Weapon && part != _body.Body && !part.IsCut)
+            {
+                part.Cut(part == _body.Head ? CuttingSprite.Direction.Up : CuttingSprite.Direction.Down);
+                return;
+            }
         }
     }
 }
