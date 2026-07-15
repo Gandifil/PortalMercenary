@@ -15,6 +15,10 @@
       "importer": "TexturePackerJsonImporter",
       "processor": "TexturePackerProcessor"
     },
+    "*/*.fx": {
+      "importer": "EffectImporter",
+      "processor": "EffectProcessor"
+    },
     "*/*.json": {
       "copy": true
     },

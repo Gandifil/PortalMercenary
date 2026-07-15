@@ -20,6 +20,8 @@ public class ContentSchema(ContentManager contentManager)
     
     public readonly Folder<SoundEffect> Sounds = new(contentManager, "sounds/");
     
+    public readonly Folder<Effect> Effects = new(contentManager, "effects/");
+    
     public readonly ContentLoaderFolder<SpriteSheet> Spritesheets = 
         new(contentManager, "images/", ".json", new SpriteSheetContentLoader());
 }

@@ -75,3 +75,8 @@
 /processor:SoundEffectProcessor
 /build:sounds/ogre/ogre5.wav
 
+#begin effects/cutEffect.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/build:effects/cutEffect.fx
+
