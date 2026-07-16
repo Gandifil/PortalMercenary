@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Monogame.Enchanted;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using MonoGame.Extended.Collisions.Layers;
@@ -10,10 +11,8 @@ using PortalMercenary.Game.Controllers;
 
 namespace PortalMercenary;
 
-public class Game1 : Microsoft.Xna.Framework.Game
+public class Game1 : BaseGame
 {
-    private GraphicsDeviceManager _graphics;
-    public SpriteBatch SpriteBatch  { get; private set; }
     public CharacterManager CharacterManager { get; private set; }
 
     public DecalsComponent DecalsComponent { get; private set; }
@@ -27,23 +26,12 @@ public class Game1 : Microsoft.Xna.Framework.Game
     private Vector2 _backgroundOffset = Vector2.Zero;
     private Texture2D _backgroundPattern;
 
-    public Game1()
+    public Game1(): base("Викинги: Кровь на Траве", 800, 450, false)
     {
-        _graphics = new GraphicsDeviceManager(this);
-        _graphics.PreferredBackBufferWidth = 800;
-        _graphics.PreferredBackBufferHeight = 450;
-        _graphics.ApplyChanges();
-        Content.RootDirectory = "Content";
-        Window.Title = "Викинги: Кровь на Траве";
-        Window.AllowUserResizing = true;
-        IsMouseVisible = true;
     }
 
     protected override void Initialize()
     {
-        // Create a new graphics device manager.
-        SpriteBatch = new SpriteBatch(GraphicsDevice);
-
         G.Init(this);
         Components.Add(DecalsComponent = new DecalsComponent(100));
         Components.Add(CharacterManager = new CharacterManager(this));
