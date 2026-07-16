@@ -23,10 +23,16 @@ public class CuttingSprite: Sprite
     {
         U = (TextureRegion.LeftUV + TextureRegion.RightUV) / 2;
         V = (TextureRegion.TopUV + TextureRegion.BottomUV) / 2;
-        //var randomAngle = ( - .5f) * MathF.PI;
-        Angle = Random.Shared.NextSingle();//(MathF.Cos(randomAngle) + 1f) / 2;
-        Mode = direction == Direction.Up ? 1 : 0;
-        Color = new Color(U, V, Angle, Mode);
+        Cut(U, V, Random.Shared.NextSingle(), direction);
+    }
+
+    private void Cut(float u, float v, float angle, Direction direction)
+    {
+        U = u;
+        V = v;
+        Angle = angle;
+        _direction = direction;
+        Color = new Color(U, V, Angle, direction == Direction.Up ? 1 : 0);
         IsСut = true;
     }
     
@@ -36,5 +42,12 @@ public class CuttingSprite: Sprite
         
     private float Angle;
 
-    private float Mode;
+    private Direction _direction;
+
+    public CuttingSprite GetReversed()
+    {
+        var sprite = new CuttingSprite(this);
+        sprite.Cut(U, V, Angle, _direction == Direction.Up ? Direction.Down : Direction.Up);
+        return sprite;
+    }
 }

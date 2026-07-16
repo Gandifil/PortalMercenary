@@ -10,6 +10,7 @@ public class CharacterManager: SimpleDrawableGameComponent
 {
     private readonly Game1 _game;
     private readonly List<Character> _characters = new();
+    private List<Slice> _slices = new();
     private readonly SpriteBatch _spriteBatch;
 
     public CharacterManager(Game1 game)
@@ -19,6 +20,7 @@ public class CharacterManager: SimpleDrawableGameComponent
     }
 
     private Effect _cutEffect;
+
     protected override void LoadContent()
     {
         base.LoadContent();
@@ -27,7 +29,6 @@ public class CharacterManager: SimpleDrawableGameComponent
     }
 
     public CharacterSpawner GetSpawner() => new (this);
-    
 
     public Character Add(Character character)
     {
@@ -35,12 +36,19 @@ public class CharacterManager: SimpleDrawableGameComponent
         G.Game.CollisionWorld.Insert(character);
         return character;
     }
+
+    public void Add(Slice slice)
+    {
+        _slices.Add(slice);
+    }
     
     public override void Update(GameTime gameTime)
     {
         var dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-        foreach (var character in _characters)
-            character.Update(dt);
+        foreach (var item in _slices)
+            item.Update(dt);
+        foreach (var item in _characters)
+            item.Update(dt);
         
         G.Game.CollisionWorld.RebuildDynamicLayers();
     }
@@ -48,8 +56,10 @@ public class CharacterManager: SimpleDrawableGameComponent
     public override void Draw(GameTime gameTime)
     {
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp, effect: _cutEffect);
-        foreach (var character in _characters)
-            character.Draw(_spriteBatch);
+        foreach (var item in _slices)
+            item.Draw(_spriteBatch);
+        foreach (var item in _characters)
+            item.Draw(_spriteBatch);
         _spriteBatch.End();
     }
 }

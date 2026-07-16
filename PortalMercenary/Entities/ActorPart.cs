@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Graphics;
+using PortalMercenary.Game;
 using PortalMercenary.Graphics;
 
 namespace PortalMercenary.Entities;
@@ -11,6 +12,7 @@ public class ActorPart
 {
     private readonly Actor _actor;
     public readonly CuttingSprite[] Sprites;
+    private Vector2 GlobalPosition => _actor.Position + Shift + Position;
 
     public Vector2 Position { get; set; }
     public float Rotation { get; set; }
@@ -28,7 +30,7 @@ public class ActorPart
     public void Draw(SpriteBatch spriteBatch)
     {
         var sprite = Sprites[(int)_actor.Direction];
-        sprite.Draw(spriteBatch, _actor.Position + Shift + Position, Rotation, Vector2.One);
+        sprite.Draw(spriteBatch, GlobalPosition, Rotation, Vector2.One);
     }
     
     public void Cut(CuttingSprite.Direction direction)
@@ -36,5 +38,8 @@ public class ActorPart
         IsCut = true;
         foreach (var sprite in Sprites)
             sprite.Cut(direction);
+        var reversed = Sprites[(int)_actor.Direction].GetReversed();
+        var impulse = new Vector2(Random.Shared.Next(-100, 100),  Random.Shared.Next(-100, 100));
+        G.Game.CharacterManager.Add(new Slice(reversed, GlobalPosition, impulse, 100f));
     }
 }

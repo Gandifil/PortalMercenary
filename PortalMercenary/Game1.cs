@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using MonoGame.Extended.Collisions.Layers;
-using MonoGame.Extended.Tweening;
 using PortalMercenary.Animation;
 using PortalMercenary.Game;
 using PortalMercenary.Game.Controllers;
