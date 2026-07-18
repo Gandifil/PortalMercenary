@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Coroutine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -42,16 +45,34 @@ public class TilemapGameScreen: GameScreen
         _renderer.LoadTilemap(_tilemap);
         CollisionWorld.AddTilemapCollision(_tilemap);
         
-        var objectLayer = _tilemap.Layers["spawners"] as TilemapObjectLayer ?? throw new Exception("spawners not found");
-        
-        Player = G.Game.CharacterManager.GetSpawner()
-            .WithPosition(objectLayer.Objects[2].Position)
-            .WithController(new AiController())
-            .Spawn("player")
-            .WithPosition(objectLayer.Objects[0].Position)
+        var spawnPoints = _tilemap.Layers["spawners"] as TilemapObjectLayer ?? throw new Exception("spawners not found");
+
+        var spawner = G.Game.CharacterManager.GetSpawner();
+        Player = spawner
+            .WithPosition(spawnPoints.Objects[0].Position)
             .WithController(new PlayerController())
             .Spawn("player")
             .Last();
+        
+        CoroutineHandler.Start(Spawn(spawner, 
+            spawnPoints.Objects.Where(x => x.Id != 0).Select(x => x.Position).ToArray()));
+    }
+
+    private IEnumerator<Wait> Spawn(CharacterSpawner spawner, Vector2[] positions)
+    {
+        spawner.WithController(new AiController());
+
+        for (var minutes = 0; minutes < 3; minutes++)
+        {
+            for (var seconds = 0; seconds < 60; seconds+=10)
+            {
+                for (var i = 0; i < (minutes+1); i++)
+                {
+                    spawner.WithPosition(Random.Shared.GetItems(positions, 1)[0]).Spawn("player");
+                }
+                yield return new Wait(10);
+            }
+        }
     }
 
     public override void UnloadContent()

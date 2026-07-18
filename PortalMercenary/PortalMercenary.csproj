@@ -30,6 +30,7 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Contentless" Version="4.2.2" />
+        <PackageReference Include="Coroutine" Version="2.1.5" />
         <PackageReference Include="FreeTexturePackerPipeline" Version="1.0.0" />
         <PackageReference Include="FreeTexturePackerReader" Version="1.0.0" />
         <PackageReference Include="MonoGame.Extended" Version="6.0.1" />

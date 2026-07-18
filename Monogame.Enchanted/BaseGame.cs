@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Coroutine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Monogame.Enchanted.Debug;
@@ -44,7 +45,7 @@ public class BaseGame: Game
     protected override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        
+        CoroutineHandler.Tick(gameTime.ElapsedGameTime.TotalSeconds);
         KeyboardExtended.Update();
     }
 
