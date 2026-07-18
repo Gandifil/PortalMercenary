@@ -55,7 +55,7 @@ public class CharacterManager: SimpleDrawableGameComponent
 
     public override void Draw(GameTime gameTime)
     {
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp, effect: _cutEffect);
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp, effect: _cutEffect, transformMatrix: G.Game.Camera.GetViewMatrix());
         foreach (var item in _slices)
             item.Draw(_spriteBatch);
         foreach (var item in _characters)

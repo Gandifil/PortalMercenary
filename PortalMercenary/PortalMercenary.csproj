@@ -41,6 +41,7 @@
       <ProjectReference Include="..\Monogame.Enchanted\Monogame.Enchanted.csproj" />
     </ItemGroup>
     <ItemGroup>
+      <Folder Include="Content\maps\" />
       <Folder Include="Content\sounds\" />
     </ItemGroup>
     <ItemGroup>

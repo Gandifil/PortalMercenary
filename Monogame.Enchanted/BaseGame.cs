@@ -27,6 +27,8 @@ public class BaseGame: Game
         Window.Title = title;
         Window.AllowUserResizing = true;
         IsMouseVisible = true;
+        
+        Components.ComponentAdded += (_, e) => Log.Info("Added Component " + e.GameComponent.GetType().Name);
     }
 
     protected override void Initialize()
