@@ -2,6 +2,8 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Monogame.Enchanted.Debug;
+using MonoGame.Extended;
+using MonoGame.Extended.Screens;
 
 namespace Monogame.Enchanted;
 
@@ -10,6 +12,8 @@ public class BaseGame: Game
     public GraphicsDeviceManager Graphics { get; }
     
     public SpriteBatch SpriteBatch  { get; private set; }
+    
+    public ScreenManager ScreenManager  { get; private set; }
     
     public BaseGame(string title, int width, int height, bool fullScreen)
     {
@@ -27,9 +31,10 @@ public class BaseGame: Game
 
     protected override void Initialize()
     {
-        SpriteBatch = new SpriteBatch(GraphicsDevice);
-        
         AddDebug();
+        SpriteBatch = new SpriteBatch(GraphicsDevice);
+        ScreenManager = Components.Add<ScreenManager>();
+        ScreenManager.DrawOrder = -1;
         base.Initialize();
     }
 

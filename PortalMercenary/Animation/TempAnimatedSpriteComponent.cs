@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Animations;
 using MonoGame.Extended.Graphics;
@@ -60,7 +61,9 @@ public class TempAnimatedSpriteComponent: SimpleDrawableGameComponent
 
     public override void Draw(GameTime gameTime)
     {
+        G.Game.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
         foreach (var animation in _animatedSprites)
             _game.SpriteBatch.Draw(animation.AnimatedSprite, animation.Position, animation.Rotation); 
+        G.Game.SpriteBatch.End();
     }
 }
