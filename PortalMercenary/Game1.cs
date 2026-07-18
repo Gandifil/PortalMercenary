@@ -8,6 +8,7 @@ using MonoGame.Extended.Collisions.Layers;
 using MonoGame.Extended.ViewportAdapters;
 using PortalMercenary.Animation;
 using PortalMercenary.Game;
+using PortalMercenary.Graphics;
 using PortalMercenary.Screens;
 
 namespace PortalMercenary;

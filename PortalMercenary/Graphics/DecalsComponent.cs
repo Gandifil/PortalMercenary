@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Graphics;
 
-namespace PortalMercenary;
+namespace PortalMercenary.Graphics;
 
 public class DecalsComponent: SimpleDrawableGameComponent
 {
