@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -42,6 +44,8 @@ public class CharacterManager: SimpleDrawableGameComponent
     {
         _slices.Add(slice);
     }
+
+    public event Action CharacterRemoved;
     
     public override void Update(GameTime gameTime)
     {
@@ -50,7 +54,15 @@ public class CharacterManager: SimpleDrawableGameComponent
             item.Update(dt);
         foreach (var item in _characters)
             item.Update(dt);
-        _characters.RemoveAll(x => !x.IsAlive);
+
+        var charactersToRemove = _characters.Where(x => !x.IsAlive).ToList();
+        foreach (var item in charactersToRemove)
+            G.Screen.CollisionWorld.Remove(item);
+        var count = _characters.RemoveAll(x => !x.IsAlive);
+        for (var i = 0; i < count; i++)
+        {
+            CharacterRemoved?.Invoke();
+        }
         
         G.Screen.CollisionWorld.RebuildDynamicLayers();
     }

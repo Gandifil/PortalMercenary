@@ -107,3 +107,18 @@
 /processor:TilemapTilesetProcessor
 /build:maps/Water Background color.tsx
 
+#begin fonts/04b_30.fnt
+/importer:BitmapFontImporter
+/processor:BitmapFontProcessor
+/build:fonts/04b_30.fnt
+
+#begin fonts/04B_30.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/build:fonts/04B_30.spritefont
+
+#begin fonts/04B_30_5x.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/build:fonts/04B_30_5x.spritefont
+

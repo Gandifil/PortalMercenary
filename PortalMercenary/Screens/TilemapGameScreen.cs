@@ -26,6 +26,8 @@ public class TilemapGameScreen: GameScreen
     public CollisionWorld2D CollisionWorld { get; private set; }
     
     private Tilemap _tilemap;
+    private SpriteFont _font;
+    private int _killsCount;
 
     public TilemapGameScreen(string mapName) : base(G.Game)
     {
@@ -41,6 +43,7 @@ public class TilemapGameScreen: GameScreen
     {
         base.LoadContent();
         
+        _font = G.Game.Content.Load<SpriteFont>("fonts/04B_30");
         _tilemap = Content.Load<Tilemap>(_mapName);
         _renderer.LoadTilemap(_tilemap);
         CollisionWorld.AddTilemapCollision(_tilemap);
@@ -53,7 +56,8 @@ public class TilemapGameScreen: GameScreen
             .WithController(new PlayerController())
             .Spawn("player")
             .Last();
-        
+
+        G.Game.CharacterManager.CharacterRemoved += () => _killsCount++;
         CoroutineHandler.Start(Spawn(spawner, 
             spawnPoints.Objects.Where(x => x.Id != 0).Select(x => x.Position).ToArray()));
     }
@@ -82,8 +86,12 @@ public class TilemapGameScreen: GameScreen
         Content.UnloadAsset(_tilemap.Name);
     }
 
+
+    private float allTime;
+    
     public override void Update(GameTime gameTime)
     {
+        allTime += gameTime.GetElapsedSeconds();
         _renderer.Update(gameTime);
         G.Game.Camera.LookAt(Player.Position);
     }
@@ -91,5 +99,10 @@ public class TilemapGameScreen: GameScreen
     public override void Draw(GameTime gameTime)
     {
         _renderer.Draw(_spriteBatch, G.Game.Camera);
+        _spriteBatch.Begin();
+        var time = 180 - (int)allTime;
+        _spriteBatch.DrawString(_font, $"SURVIVE! {time / 60}:{time % 60} REMAINING", new Vector2(10, 10), Color.White);
+        _spriteBatch.DrawString(_font, $"YOU MAKE {_killsCount} KILLS", new Vector2(10, 50), Color.White);
+        _spriteBatch.End();
     }
 }
