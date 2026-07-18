@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Graphics;
@@ -22,17 +23,16 @@ public class Slice
         _height = height;
     }
 
-    private const float Gravity = 100f;
+    private const float Gravity = 200f;
 
     public void Update(float dt)
     {
         _position += _impulse * dt;
-        _height -= _impulse.Y * dt;
 
         if  (_height < 0)
         {
             _impulse.Y = 0;
-            _rotation -= _impulse.X * dt;
+            _rotation += _impulse.X * dt / (2 * MathF.PI);
             _impulse.X -= _impulse.X * dt * .5f;
         }
         else

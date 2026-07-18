@@ -39,7 +39,8 @@ public class Character: Entity
         var speed = IsRunning ? _options.RunMovementSpeed : _options.MovementSpeed;
         Position += Actor.Shift * speed * dt;
         
-        if (G.Screen.CollisionWorld.QueryCollisions(this, CollisionWorldExtensions.LAYER_NAME).Any())
+        if (G.Screen.CollisionWorld.QueryCollisions(this, CollisionWorldExtensions.LAYER_NAME).Any() ||
+            G.Screen.CollisionWorld.QueryCollisions(this, null).Any())
         {
             Position = oldPosition;
         }
@@ -66,11 +67,11 @@ public class Character: Entity
                 target: this, 
                 expression: x => x.Position, 
                 toValue: Position + pos, 
-                duration: .1f, 
+                duration: .1f,  
                 delay: 0)
             .Easing(EasingFunctions.ElasticOut);
         G.Game.DecalsComponent.Add(Position);
-        G.Content.Sounds[_options.DamageSounds[Random.Shared.Next(_options.DamageSounds.Length)]].Play();
+        G.Content.Sounds[_options.DamageSounds[Random.Shared.Next(_options.DamageSounds.Length)]].Play(.25f, 0, 1);
 
         Actor.CutAnything();
     }

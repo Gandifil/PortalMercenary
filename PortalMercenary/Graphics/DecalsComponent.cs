@@ -48,7 +48,7 @@ public class DecalsComponent: SimpleDrawableGameComponent
 
     public override void Draw(GameTime gameTime)
     {
-        G.Game.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        G.Game.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: G.Game.Camera.GetViewMatrix());
         foreach (var decal in _decals)
             if (decal.IsActive)
                 decal.Sprite.Draw(G.Game.SpriteBatch, decal.Position, decal.Rotation, decal.Scale);
