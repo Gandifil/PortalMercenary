@@ -102,11 +102,16 @@ public class Actor
         Random.Shared.Shuffle(parts);
         foreach (var part in parts)
         {
-            if (part != _body.Weapon && part != _body.Body && !part.IsCut)
+            if (part == _body.Weapon || part == _body.Body|| part.IsDetached) continue;
+            if (part.IsCut)
+            {
+                part.Detach();
+            }
+            else
             {
                 part.Cut(part == _body.Head ? CuttingSprite.Direction.Up : CuttingSprite.Direction.Down);
-                return;
             }
+            return;
         }
     }
 }

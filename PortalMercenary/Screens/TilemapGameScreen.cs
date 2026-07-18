@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
@@ -32,16 +33,13 @@ public class TilemapGameScreen: GameScreen
         _tilemap = Content.Load<Tilemap>(_mapName);
         _renderer.LoadTilemap(_tilemap);
         
-        var objectLayer = _tilemap.Layers["spawners"] as TilemapObjectLayer;
+        var objectLayer = _tilemap.Layers["spawners"] as TilemapObjectLayer ?? throw new Exception("spawners not found");
         
         Player = G.Game.CharacterManager.GetSpawner()
-            // .MovePosition(new Vector2(100, 100))
-            // .WithController(new DollController())
-            // .Spawn("player")
-            // .MovePosition(new Vector2(100, 100))
-            // .WithController(new AiController())
-            // .Spawn("player")
-            .MovePosition(objectLayer.Objects[0].Position)
+            .WithPosition(objectLayer.Objects[2].Position)
+            .WithController(new AiController())
+            .Spawn("player")
+            .WithPosition(objectLayer.Objects[0].Position)
             .WithController(new PlayerController())
             .Spawn("player")
             .Last();

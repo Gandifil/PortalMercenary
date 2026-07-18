@@ -20,6 +20,7 @@ public class ActorPart
     public Vector2 Shift { get; set; }
     
     public bool IsCut {get; private set; }
+    public bool IsDetached {get; private set; }
     
     public ActorPart(Actor actor, Sprite[] sprites)
     {
@@ -29,6 +30,8 @@ public class ActorPart
 
     public void Draw(SpriteBatch spriteBatch)
     {
+        if (IsDetached)
+            return;
         var sprite = Sprites[(int)_actor.Direction];
         sprite.Draw(spriteBatch, GlobalPosition, Rotation, Vector2.One);
     }
@@ -41,5 +44,12 @@ public class ActorPart
         var reversed = Sprites[(int)_actor.Direction].GetReversed();
         var impulse = new Vector2(Random.Shared.Next(-100, 100),  Random.Shared.Next(-100, 100));
         G.Game.CharacterManager.Add(new Slice(reversed, GlobalPosition, impulse, 100f));
+    }
+
+    public void Detach()
+    {
+        var impulse = new Vector2(Random.Shared.Next(-100, 100),  Random.Shared.Next(-100, 100));
+        G.Game.CharacterManager.Add(new Slice(Sprites[(int)_actor.Direction], GlobalPosition, impulse, 100f));
+        IsDetached = true;
     }
 }
