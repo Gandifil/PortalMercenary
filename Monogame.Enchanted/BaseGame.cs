@@ -1,5 +1,7 @@
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Monogame.Enchanted.Debug;
 
 namespace Monogame.Enchanted;
 
@@ -27,16 +29,13 @@ public class BaseGame: Game
     {
         SpriteBatch = new SpriteBatch(GraphicsDevice);
         
+        AddDebug();
         base.Initialize();
     }
 
-    protected override bool BeginDraw()
+    [Conditional("DEBUG")]
+    private void AddDebug()
     {
-        return base.BeginDraw();
-    }
-
-    protected override void EndDraw()
-    {
-        base.EndDraw();
+        Components.Add(new DebugGameComponent(this));
     }
 }

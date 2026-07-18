@@ -4,12 +4,14 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="MonoGame.Extended.Content.Pipeline" Version="6.0.1" />
       <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.4.1" />
       <PackageReference Include="MonoGame.Extended" Version="6.0.1" />
+      <PackageReference Include="ImGui.NET" Version="1.91.6.1" Condition="'$(Configuration)'=='Debug'"/>
     </ItemGroup>
 
 </Project>
