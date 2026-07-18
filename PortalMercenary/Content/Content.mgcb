@@ -80,3 +80,30 @@
 /processor:EffectProcessor
 /build:effects/cutEffect.fx
 
+#begin maps/island.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/build:maps/island.tmx
+
+#begin maps/Tilemap_color3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:TextureFormat=NoChange
+/build:maps/Tilemap_color3.png
+
+#begin maps/Tilemap_color3.tsx
+/importer:TilemapTilesetImporter
+/processor:TilemapTilesetProcessor
+/build:maps/Tilemap_color3.tsx
+
+#begin maps/Water Background color.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:TextureFormat=NoChange
+/build:maps/Water Background color.png
+
+#begin maps/Water Background color.tsx
+/importer:TilemapTilesetImporter
+/processor:TilemapTilesetProcessor
+/build:maps/Water Background color.tsx
+
