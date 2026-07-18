@@ -12,19 +12,22 @@ namespace PortalMercenary.Entities;
 public class Actor
 {
     private readonly ActorBody _body;
+    private readonly Entity _entity;
 
-    public Vector2 Position { get; set; } = Vector2.Zero;
+    public Vector2 Position => _entity.Position;
 
     public ActorOptions Options { get; set; } = new();
+    
+    
 
     public Direction Direction { get; private set; }
     public Vector2 Shift { get; set; }
-    //public Vector2 ControlShift { get; set; } = Vector2.Zero;
 
     private float _t; 
     
-    public Actor(Texture2DAtlas textureAtlas)
+    public Actor(Entity entity, Texture2DAtlas textureAtlas)
     {
+        _entity = entity;
         _body = new ActorBody(this, textureAtlas);
     }
     
@@ -50,8 +53,6 @@ public class Actor
             Direction =  Direction.Right;
         else if (Shift.X < 0)
             Direction =  Direction.Left;
-
-        Position += Shift * 100 * dt;
         
         var t = dt * Options.Speed;
         _t += Shift.X > 0 ? t: -t; // по или против часовой стрелки

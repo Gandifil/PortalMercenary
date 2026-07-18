@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Monogame.Enchanted.Debug;
 using MonoGame.Extended;
+using MonoGame.Extended.Input;
 using MonoGame.Extended.Screens;
 
 namespace Monogame.Enchanted;
@@ -38,6 +39,13 @@ public class BaseGame: Game
         ScreenManager = Components.Add<ScreenManager>();
         ScreenManager.DrawOrder = -1;
         base.Initialize();
+    }
+
+    protected override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+        
+        KeyboardExtended.Update();
     }
 
     [Conditional("DEBUG")]

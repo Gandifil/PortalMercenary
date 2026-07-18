@@ -3,6 +3,8 @@ namespace PortalMercenary.Game;
 public class CharacterOptions
 {
     public string Atlas { get; set; }
+    public float MovementSpeed { get; set; }
+    public float RunMovementSpeed { get; set; }
 
     public AttackOptions Attack { get; set; }
     

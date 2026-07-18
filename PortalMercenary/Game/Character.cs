@@ -1,51 +1,51 @@
 using System;
-using System.Collections.Specialized;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Monogame.Enchanted.Debug;
 using MonoGame.Extended;
-using MonoGame.Extended.Collisions;
 using MonoGame.Extended.Tweening;
 using PortalMercenary.Entities;
-using PortalMercenary.Entities.Animations;
 using PortalMercenary.Extensions;
 using PortalMercenary.Game.Controllers;
 
 namespace PortalMercenary.Game;
 
-public class Character: ICollisionActor
+public class Character: Entity
 {
     private readonly CharacterOptions _options;
     private readonly AttackProcessor _attackProcessor;
+    
     public Actor Actor { get; set; }
 
     public required ICharacterController Controller { get; init; }
-    public Vector2 Position => Actor.Position;
 
-    public Character(Vector2 position, CharacterOptions options)
+    public bool IsRunning { get; set; }
+
+    public Character(Vector2 position, CharacterOptions options): base(position)
     {
-        Id = GetHashCode();
         _options = options;
         _attackProcessor = new AttackProcessor(options.Attack);
-        Actor = new Actor(G.Content.FreeTexPackerSpritesheets[options.Atlas].ToTexture2DAtlas())
-        {
-            Position = position
-        };
+        Actor = new Actor(this, G.Content.FreeTexPackerSpritesheets[options.Atlas].ToTexture2DAtlas());
     }
 
-    public void Update(float dt)
+    public override void Update(float dt)
     {
-        var oldPosition = Actor.Position;
+        var oldPosition = Position;
         Controller.Update(this, dt);
-        Actor.Update(dt);
+
+        var speed = IsRunning ? _options.RunMovementSpeed : _options.MovementSpeed;
+        Position += Actor.Shift * speed * dt;
         
         foreach (var collision in G.Game.CollisionWorld.QueryCollisions(this, null))
         {
-            Actor.Position = oldPosition;
+            Position = oldPosition;
         }
+        Actor.Update(IsRunning ? 3*dt : dt);
     }
 
     public void Draw(SpriteBatch gameSpriteBatch)
     {
+        DebugHighlight.DrawCircle(gameSpriteBatch, Position, 20);
         Actor.Draw(gameSpriteBatch);
     }
 
@@ -60,9 +60,9 @@ public class Character: ICollisionActor
     public void Damage(Vector2 pos)
     {
         G.Tweener.TweenTo(
-                target: Actor, 
+                target: this, 
                 expression: x => x.Position, 
-                toValue: Actor.Position + pos, 
+                toValue: Position + pos, 
                 duration: .1f, 
                 delay: 0)
             .Easing(EasingFunctions.ElasticOut);
@@ -72,9 +72,7 @@ public class Character: ICollisionActor
         Actor.CutAnything();
     }
 
-    public int Id { get; }
-
-    public CollisionShape2D Shape
+    public override CollisionShape2D Shape
     {
         get
         {

@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
+using MonoGame.Extended.Input;
 
 namespace PortalMercenary.Game.Controllers;
 
@@ -19,5 +20,6 @@ public class PlayerController : ICharacterController
         if (keys.IsKeyDown(Keys.A) || keys.IsKeyDown(Keys.Left))   move.X -= 1;
         if (keys.IsKeyDown(Keys.D) || keys.IsKeyDown(Keys.Right))  move.X += 1;
         character.Actor.Shift = move == Vector2.Zero ? move : move.NormalizedCopy();
+        character.IsRunning = keys.IsKeyDown(Keys.LeftShift);
     }
 }
