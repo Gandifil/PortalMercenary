@@ -15,11 +15,11 @@ namespace PortalMercenary;
 
 public class Game1 : BaseGame
 {
+    public const int TILE_WIDTH = 64;
+    public const int TILE_HEIGHT = 64;
     public CharacterManager CharacterManager { get; private set; }
 
     public DecalsComponent DecalsComponent { get; private set; }
-
-    public CollisionWorld2D CollisionWorld { get; private set; }
     
     public TempAnimatedSpriteComponent Animations { get; private set; }
     
@@ -37,7 +37,6 @@ public class Game1 : BaseGame
         Components.Add(DecalsComponent = new DecalsComponent(100));
         Components.Add(Animations = new TempAnimatedSpriteComponent(this));
         Components.Add(CharacterManager = new CharacterManager(this));
-        CollisionWorld = new CollisionWorld2D(new Layer(new SpatialHash(new SizeF(128f, 128f))));
         base.Initialize();
         //ScreenManager.ShowScreen(new PrimitiveScreen(this));
         ScreenManager.ShowScreen(new TilemapGameScreen("maps/island"));

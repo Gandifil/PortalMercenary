@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Monogame.Enchanted.Debug;
@@ -7,6 +8,7 @@ using MonoGame.Extended.Tweening;
 using PortalMercenary.Entities;
 using PortalMercenary.Extensions;
 using PortalMercenary.Game.Controllers;
+using PortalMercenary.Utils;
 
 namespace PortalMercenary.Game;
 
@@ -36,7 +38,7 @@ public class Character: Entity
         var speed = IsRunning ? _options.RunMovementSpeed : _options.MovementSpeed;
         Position += Actor.Shift * speed * dt;
         
-        foreach (var collision in G.Game.CollisionWorld.QueryCollisions(this, null))
+        if (G.Screen.CollisionWorld.QueryCollisions(this, CollisionWorldExtensions.LAYER_NAME).Any())
         {
             Position = oldPosition;
         }

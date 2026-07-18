@@ -33,7 +33,7 @@ public class CharacterManager: SimpleDrawableGameComponent
     public Character Add(Character character)
     {
         _characters.Add(character);
-        G.Game.CollisionWorld.Insert(character);
+        G.Screen.CollisionWorld.Insert(character);
         return character;
     }
 
@@ -50,7 +50,7 @@ public class CharacterManager: SimpleDrawableGameComponent
         foreach (var item in _characters)
             item.Update(dt);
         
-        G.Game.CollisionWorld.RebuildDynamicLayers();
+        G.Screen.CollisionWorld.RebuildDynamicLayers();
     }
 
     public override void Draw(GameTime gameTime)

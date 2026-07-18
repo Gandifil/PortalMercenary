@@ -39,11 +39,11 @@ public class AttackProcessor
         {
             ((AttackAnimation)sender).ReachedHalf -= AnimOnReachedHalf;
             var collActor = new StrikeCollisionActor(globalPosition);
-            G.Game.CollisionWorld.Insert(collActor);
-            foreach (var collision in G.Game.CollisionWorld.QueryCollisions(collActor, null))
+            G.Screen.CollisionWorld.Insert(collActor);
+            foreach (var collision in G.Screen.CollisionWorld.QueryCollisions(collActor, null))
                 if (collision.Other is Character other && other != attacker)
                     other.Damage(localPosition);
-            G.Game.CollisionWorld.Remove(collActor);
+            G.Screen.CollisionWorld.Remove(collActor);
         }
         
         actor.Start(anim);

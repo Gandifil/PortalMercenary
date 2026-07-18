@@ -1,11 +1,15 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
+using MonoGame.Extended.Collisions.Layers;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Tilemaps;
 using MonoGame.Extended.Tilemaps.Rendering;
 using PortalMercenary.Game;
 using PortalMercenary.Game.Controllers;
+using PortalMercenary.Utils;
 
 namespace PortalMercenary.Screens;
 
@@ -15,6 +19,8 @@ public class TilemapGameScreen: GameScreen
     private readonly TilemapSpriteBatchRenderer _renderer;
     private readonly SpriteBatch _spriteBatch;
     public static Character Player { get; private set; }
+
+    public CollisionWorld2D CollisionWorld { get; private set; }
     
     private Tilemap _tilemap;
 
@@ -24,6 +30,8 @@ public class TilemapGameScreen: GameScreen
 
         _renderer = new TilemapSpriteBatchRenderer();
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+        CollisionWorld = new CollisionWorld2D(new Layer(new SpatialHash(new SizeF(128f, 128f))));
+        G.Init2(this);
     }
 
     public override void LoadContent()
@@ -32,6 +40,7 @@ public class TilemapGameScreen: GameScreen
         
         _tilemap = Content.Load<Tilemap>(_mapName);
         _renderer.LoadTilemap(_tilemap);
+        CollisionWorld.AddTilemapCollision(_tilemap);
         
         var objectLayer = _tilemap.Layers["spawners"] as TilemapObjectLayer ?? throw new Exception("spawners not found");
         
