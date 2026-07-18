@@ -9,6 +9,6 @@ public class AiController: ICharacterController
     public void Update(Character character, float dt)
     {
         var player = TilemapGameScreen.Player;
-        character.Actor.Shift = (player?.Position ?? Vector2.Zero - character.Position).NormalizedCopy();
+        character.Actor.Shift = (player.Position - character.Position).NormalizedCopy();
     }
 }

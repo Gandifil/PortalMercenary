@@ -28,6 +28,7 @@ public class Character: Entity
         _options = options;
         _attackProcessor = new AttackProcessor(options.Attack);
         Actor = new Actor(this, G.Content.FreeTexPackerSpritesheets[options.Atlas].ToTexture2DAtlas());
+        Actor.Unheaded += Die;
     }
 
     public override void Update(float dt)

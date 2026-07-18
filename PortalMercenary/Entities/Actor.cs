@@ -96,6 +96,8 @@ public class Actor
         }
     }
 
+    public event Action Unheaded;
+
     public void CutAnything()
     {
         var parts = _body.Parts.ToArray();
@@ -106,6 +108,8 @@ public class Actor
             if (part.IsCut)
             {
                 part.Detach();
+                if (part == _body.Head)
+                    Unheaded?.Invoke();
             }
             else
             {

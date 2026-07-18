@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using PortalMercenary.Entities;
 using PortalMercenary.Game.Controllers;
 
 namespace PortalMercenary.Game;
@@ -49,6 +50,7 @@ public class CharacterManager: SimpleDrawableGameComponent
             item.Update(dt);
         foreach (var item in _characters)
             item.Update(dt);
+        _characters.RemoveAll(x => !x.IsAlive);
         
         G.Screen.CollisionWorld.RebuildDynamicLayers();
     }

@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Monogame.Enchanted;
 using MonoGame.Extended;
@@ -18,4 +19,14 @@ public abstract class Entity : IFloatUpdatable, ICollisionActor
     }
     
     public abstract void Update(float dt);
+
+    public bool IsAlive { get; private set; } = true;
+
+    public event Action<Entity> Died;
+
+    protected void Die()
+    {
+        IsAlive = false;
+        Died?.Invoke(this);
+    }
 }
