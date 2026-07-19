@@ -63,6 +63,7 @@ public class CharacterManager: SimpleDrawableGameComponent
         {
             CharacterRemoved?.Invoke();
         }
+        _characters.Sort((x, y) => x.Position.Y.CompareTo(y.Position.Y));
         
         G.Screen.CollisionWorld.RebuildDynamicLayers();
     }
