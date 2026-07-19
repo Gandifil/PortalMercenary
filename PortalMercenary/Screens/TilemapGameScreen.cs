@@ -8,6 +8,7 @@ using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using MonoGame.Extended.Collisions.Layers;
 using MonoGame.Extended.Screens;
+using MonoGame.Extended.Screens.Transitions;
 using MonoGame.Extended.Tilemaps;
 using MonoGame.Extended.Tilemaps.Rendering;
 using PortalMercenary.Game;
@@ -18,16 +19,18 @@ namespace PortalMercenary.Screens;
 
 public class TilemapGameScreen: GameScreen
 {
+    public const float MAX_TIME = 60;
+    
     private readonly string _mapName;
     private readonly TilemapSpriteBatchRenderer _renderer;
     private readonly SpriteBatch _spriteBatch;
+    private GameStats _gameStats;
     public static Character Player { get; private set; }
 
     public CollisionWorld2D CollisionWorld { get; private set; }
     
     private Tilemap _tilemap;
     private SpriteFont _font;
-    private int _killsCount;
 
     public TilemapGameScreen(string mapName) : base(G.Game)
     {
@@ -57,7 +60,7 @@ public class TilemapGameScreen: GameScreen
             .Spawn("player")
             .Last();
 
-        G.Game.CharacterManager.CharacterRemoved += () => _killsCount++;
+        G.Game.CharacterManager.CharacterRemoved += () => _gameStats.Kills++;
         CoroutineHandler.Start(Spawn(spawner, 
             spawnPoints.Objects.Where(x => x.Id != 1).Select(x => x.Position).ToArray()));
     }
@@ -85,13 +88,17 @@ public class TilemapGameScreen: GameScreen
         
         Content.UnloadAsset(_tilemap.Name);
     }
-
-
-    private float allTime;
     
     public override void Update(GameTime gameTime)
     {
-        allTime += gameTime.GetElapsedSeconds();
+        _gameStats.Time += gameTime.GetElapsedSeconds();
+        if (_gameStats.Time > MAX_TIME)
+        {
+            _gameStats.IsWin = true;
+            G.Game.ScreenManager.ReplaceScreen(
+                new ResultGameScreen(_gameStats), 
+                new FadeTransition(G.Game.GraphicsDevice, Color.Black));
+        }
         _renderer.Update(gameTime);
         G.Game.Camera.LookAt(Player.Position);
     }
@@ -99,10 +106,12 @@ public class TilemapGameScreen: GameScreen
     public override void Draw(GameTime gameTime)
     {
         _renderer.Draw(_spriteBatch, G.Game.Camera);
+        
+        var time = (int)(MAX_TIME - _gameStats.Time);
+        
         _spriteBatch.Begin();
-        var time = 180 - (int)allTime;
         _spriteBatch.DrawString(_font, $"SURVIVE! {time / 60}:{time % 60} REMAINING", new Vector2(10, 10), Color.White);
-        _spriteBatch.DrawString(_font, $"YOU MADE {_killsCount} KILLS", new Vector2(10, 50), Color.White);
+        _spriteBatch.DrawString(_font, $"YOU MADE {_gameStats.Kills} KILLS", new Vector2(10, 50), Color.White);
         _spriteBatch.End();
     }
 }
