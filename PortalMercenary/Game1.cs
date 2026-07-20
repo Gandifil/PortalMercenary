@@ -23,6 +23,8 @@ public class Game1 : BaseGame
     
     public TempAnimatedSpriteComponent Animations { get; private set; }
     
+    public BloodManager BloodManager { get; private set; }
+    
     public readonly OrthographicCamera Camera;
 
     public Game1(): base("Викинги: Кровь на Траве", 800, 480, false) 
@@ -36,6 +38,7 @@ public class Game1 : BaseGame
         G.Init(this);
         Components.Add(DecalsComponent = new DecalsComponent(100));
         Components.Add(Animations = new TempAnimatedSpriteComponent(this));
+        Components.Add(BloodManager = new BloodManager());
         Components.Add(CharacterManager = new CharacterManager(this));
         base.Initialize();
         //ScreenManager.ShowScreen(new PrimitiveScreen(this));

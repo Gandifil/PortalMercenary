@@ -80,6 +80,11 @@
 /processor:EffectProcessor
 /build:effects/cutEffect.fx
 
+#begin effects/blood1.ember
+/importer:ParticleEffectImporter
+/processor:ParticleEffectProcessor
+/build:effects/blood1.ember
+
 #begin maps/island.tmx
 /importer:TiledTilemapImporter
 /processor:TilemapProcessor
@@ -121,4 +126,10 @@
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /build:fonts/04B_30_5x.spritefont
+
+#begin effects/blood_particle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:TextureFormat=NoChange
+/build:effects/blood_particle.png
 

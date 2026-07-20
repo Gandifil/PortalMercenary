@@ -73,6 +73,9 @@ public class Character: Entity
         G.Game.DecalsComponent.Add(Position);
         G.Content.Sounds[_options.DamageSounds[Random.Shared.Next(_options.DamageSounds.Length)]].Play(.25f, 0, 1);
 
+        // Создаем эффект крови
+        G.Game.BloodManager.SpawnBlood(Position, pos);
+
         Actor.CutAnything();
     }
 
