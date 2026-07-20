@@ -9,7 +9,7 @@ using MonoGame.Extended.Screens;
 
 namespace Monogame.Enchanted;
 
-public class BaseGame: Game
+public abstract class BaseGame: Game
 {
     public GraphicsDeviceManager Graphics { get; }
     

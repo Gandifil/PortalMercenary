@@ -2,7 +2,7 @@
 
 namespace ImGuiNET.SampleProgram.XNA
 {
-    public static class DrawVertDeclaration
+    internal static class DrawVertDeclaration
     {
         public static readonly VertexDeclaration Declaration;
 

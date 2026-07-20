@@ -7,7 +7,7 @@ using Vector2 = System.Numerics.Vector2;
 
 namespace Monogame.Enchanted.Debug;
 
-public class DebugGameComponent: SimpleDrawableGameComponent
+internal class DebugGameComponent: SimpleDrawableGameComponent
 {
     private readonly FrameCounter _frameCounter;
     private readonly ImGuiRenderer _imGuiRenderer;

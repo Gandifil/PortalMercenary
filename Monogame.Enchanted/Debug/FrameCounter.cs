@@ -2,7 +2,7 @@ using Monogame.Enchanted.Collections;
 
 namespace Monogame.Enchanted.Debug;
 
-public class FrameCounter: IFloatUpdatable
+internal class FrameCounter: IFloatUpdatable
 {
     public readonly CircularQueue<float> DeltaTimes = new(256);
     
