@@ -4,8 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Monogame.Enchanted.Content;
 using MonoGame.Extended.Graphics;
 using MonoGame.Extended.Serialization.Json;
-using PortalMercenary.Animation;
 using PortalMercenary.Game;
+using PortalMercenary.Graphics.Animations;
 
 namespace PortalMercenary;
 

@@ -4,9 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Animations;
 using MonoGame.Extended.Graphics;
-using PortalMercenary.Game;
 
-namespace PortalMercenary.Animation;
+namespace PortalMercenary.Graphics.Animations;
 
 public class TempAnimatedSpriteComponent: SimpleDrawableGameComponent
 {

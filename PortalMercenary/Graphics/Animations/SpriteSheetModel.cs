@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace PortalMercenary.Animation;
+namespace PortalMercenary.Graphics.Animations;
 
 public class SpriteSheetModel
 {

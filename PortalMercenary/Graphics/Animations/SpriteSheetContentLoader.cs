@@ -1,12 +1,11 @@
 using System;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Graphics;
 using MonoGame.Extended.Serialization.Json;
 using PortalMercenary.Extensions;
 
-namespace PortalMercenary.Animation;
+namespace PortalMercenary.Graphics.Animations;
 
 public class SpriteSheetContentLoader: IContentLoader<SpriteSheet>
 {

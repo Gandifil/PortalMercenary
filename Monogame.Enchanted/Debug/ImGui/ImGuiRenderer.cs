@@ -10,7 +10,7 @@ namespace ImGuiNET.SampleProgram.XNA
     /// <summary>
     /// ImGui renderer for use with XNA-likes (FNA & MonoGame)
     /// </summary>
-    public class ImGuiRenderer
+    internal class ImGuiRenderer
     {
         private Game _game;
 
