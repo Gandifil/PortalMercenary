@@ -8,7 +8,7 @@ public class AiController: ICharacterController
 {
     public void Update(Character character, float dt)
     {
-        var player = TilemapGameScreen.Player;
+        var player = G.Screen.Player;
         character.Actor.Shift = (player.Position - character.Position).NormalizedCopy();
     }
 }

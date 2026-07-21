@@ -21,13 +21,12 @@ namespace PortalMercenary.Screens;
 
 public class TilemapGameScreen: GameScreen
 {
-    public const float MAX_TIME = 20;
+    public const float MAX_TIME = 10;
     
     private readonly string _mapName;
     private readonly TilemapSpriteBatchRenderer _renderer;
     private readonly SpriteBatch _spriteBatch;
-    private GameStats _gameStats;
-    public static Character Player { get; private set; }
+    public Character Player { get; private set; }
 
     public CollisionWorld2D CollisionWorld { get; private set; }
     
@@ -39,6 +38,7 @@ public class TilemapGameScreen: GameScreen
     
     public BloodManager BloodManager { get; private set; }
     
+    private GameStats _gameStats;
     private Tilemap _tilemap;
     private SpriteFont _font;
 
@@ -49,7 +49,7 @@ public class TilemapGameScreen: GameScreen
         _renderer = new TilemapSpriteBatchRenderer();
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         CollisionWorld = new CollisionWorld2D(new Layer(new SpatialHash(new SizeF(128f, 128f))));
-        G.Init2(this);
+        G.ScreenInit(this);
     }
 
     public override void Initialize()
@@ -102,14 +102,15 @@ public class TilemapGameScreen: GameScreen
     
     public override void Update(GameTime gameTime)
     {
-        _gameStats.Time += gameTime.GetElapsedSeconds();
-        if (_gameStats.Time > MAX_TIME)
+        if (_gameStats.IsWin is null && _gameStats.Time > MAX_TIME)
         {
             _gameStats.IsWin = true;
             G.Game.ScreenManager.ReplaceScreen(
                 new ResultGameScreen(_gameStats), 
                 new FadeTransition(G.Game.GraphicsDevice, ResultGameScreen.BACKGROUND_COLOR,5f));
         }
+        else
+            _gameStats.Time += gameTime.GetElapsedSeconds();
         _renderer.Update(gameTime);
         G.Game.Camera.LookAt(Player.Position);
     }
@@ -121,7 +122,7 @@ public class TilemapGameScreen: GameScreen
         var time = (int)(MAX_TIME - _gameStats.Time);
         
         _spriteBatch.Begin();
-        _spriteBatch.DrawString(_font, $"SURVIVE! {time / 60}:{time % 60} REMAINING", new Vector2(10, 10), Color.White);
+        _spriteBatch.DrawString(_font, $"SURVIVE! {TimeSpan.FromSeconds(time)} REMAINING", new Vector2(10, 10), Color.White);
         _spriteBatch.DrawString(_font, $"YOU MADE {_gameStats.Kills} KILLS", new Vector2(10, 50), Color.White);
         _spriteBatch.End();
     }

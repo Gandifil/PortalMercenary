@@ -22,7 +22,7 @@ public class Game1 : BaseGame
 
     protected override void Initialize()
     {
-        G.Init(this);
+        G.GameInit(this);
         base.Initialize();
     }
 

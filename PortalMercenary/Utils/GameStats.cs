@@ -1,3 +1,5 @@
+using System;
+
 namespace PortalMercenary.Utils;
 
 public struct GameStats
@@ -12,7 +14,7 @@ public struct GameStats
         return
         [
             $"{(IsWin.HasValue ? (IsWin.Value ? "WIN!" : "DEFEAT!") : "N/A")}",
-            $"time: {Time:F2}",
+            $"time: {TimeSpan.FromSeconds((int)Time)}",
             $"kills: {Kills}"
         ];
     }

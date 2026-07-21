@@ -1,3 +1,4 @@
+using Monogame.Enchanted.Debug;
 using MonoGame.Extended.Tweening;
 using PortalMercenary.Screens;
 
@@ -10,15 +11,19 @@ public static class G
     public static Tweener Tweener { get; private set; }
     public static TilemapGameScreen Screen { get; private set; }
 
-    public static void Init(Game1 game)
+    public static void GameInit(Game1 game)
     {
         Game = game;
         Tweener = new ();
         Content = new ContentSchema(game.Content);
+        
+        Log.Info("G.GameInit");
     }
 
-    public static void Init2(TilemapGameScreen tilemapGameScreen)
+    public static void ScreenInit(TilemapGameScreen tilemapGameScreen)
     {
         Screen = tilemapGameScreen;
+        
+        Log.Info("G.ScreenInit");
     }
 }
