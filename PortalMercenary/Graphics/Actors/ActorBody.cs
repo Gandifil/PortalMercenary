@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.Graphics;
 
-namespace PortalMercenary.Entities;
+namespace PortalMercenary.Graphics.Actors;
 
 public class ActorBody
 {

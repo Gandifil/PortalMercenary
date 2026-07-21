@@ -4,7 +4,7 @@ using Monogame.Enchanted;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 
-namespace PortalMercenary.Entities;
+namespace PortalMercenary.Game;
 
 public abstract class Entity : IFloatUpdatable, ICollisionActor
 {

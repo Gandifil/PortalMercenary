@@ -1,4 +1,4 @@
-namespace PortalMercenary.Entities;
+namespace PortalMercenary.Graphics.Actors;
 
 public enum Direction
 {

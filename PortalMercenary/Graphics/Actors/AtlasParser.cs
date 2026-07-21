@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Graphics;
 
-namespace PortalMercenary.Entities;
+namespace PortalMercenary.Graphics.Actors;
 
 public static class AtlasParser
 {

@@ -1,6 +1,6 @@
 using MonoGame.Extended.Graphics;
 
-namespace PortalMercenary.Extensions;
+namespace PortalMercenary.Graphics.Extensions;
 
 public static class SpriteSheetExtensions
 {

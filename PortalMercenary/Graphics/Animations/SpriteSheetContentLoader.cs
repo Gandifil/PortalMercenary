@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Graphics;
 using MonoGame.Extended.Serialization.Json;
-using PortalMercenary.Extensions;
+using PortalMercenary.Graphics.Extensions;
 
 namespace PortalMercenary.Graphics.Animations;
 

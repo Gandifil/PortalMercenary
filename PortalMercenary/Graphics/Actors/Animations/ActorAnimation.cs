@@ -1,4 +1,4 @@
-namespace PortalMercenary.Entities.Animations;
+namespace PortalMercenary.Graphics.Actors.Animations;
 
 public abstract class ActorAnimation
 {

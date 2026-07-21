@@ -4,9 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Graphics;
 using PortalMercenary.Game;
-using PortalMercenary.Graphics;
 
-namespace PortalMercenary.Entities;
+namespace PortalMercenary.Graphics.Actors;
 
 public class ActorPart
 {

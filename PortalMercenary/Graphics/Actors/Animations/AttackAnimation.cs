@@ -2,7 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 
-namespace PortalMercenary.Entities.Animations;
+namespace PortalMercenary.Graphics.Actors.Animations;
 
 public class AttackAnimation: ActorAnimation
 {

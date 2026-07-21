@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Audio;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using MonoGame.Extended.Graphics;
-using PortalMercenary.Entities.Animations;
+using PortalMercenary.Graphics.Actors.Animations;
 
 namespace PortalMercenary.Game;
 

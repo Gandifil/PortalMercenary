@@ -4,7 +4,6 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using PortalMercenary.Entities;
 using PortalMercenary.Game.Controllers;
 
 namespace PortalMercenary.Game;

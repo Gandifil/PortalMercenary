@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Monogame.Enchanted.Debug;
 using MonoGame.Extended;
 using MonoGame.Extended.Tweening;
-using PortalMercenary.Entities;
-using PortalMercenary.Extensions;
 using PortalMercenary.Game.Controllers;
+using PortalMercenary.Graphics.Actors;
+using PortalMercenary.Graphics.Extensions;
 using PortalMercenary.Utils;
 
 namespace PortalMercenary.Game;
