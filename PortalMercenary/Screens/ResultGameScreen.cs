@@ -1,5 +1,7 @@
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using PortalMercenary.Utils;
 
@@ -8,16 +10,15 @@ namespace PortalMercenary.Screens;
 public class ResultGameScreen: GameScreen
 {
     public static readonly Color BACKGROUND_COLOR = new (32, 40, 78, 255);
-    private readonly GameStats _gameStats;
     private readonly string[] _text;
     private SpriteFont _font;
 
     public ResultGameScreen(GameStats gameStats) : base(G.Game)
     {
-        _gameStats = gameStats;
-
-        _text = gameStats.ToStringArray();
-
+        _text = gameStats.ToStringArray()
+            .Append("Press [ENTER] to try again")
+            .Append("Press [ESCAPE] to exit")
+            .ToArray();
     }
 
     public override void LoadContent()
@@ -29,6 +30,8 @@ public class ResultGameScreen: GameScreen
     
     public override void Update(GameTime gameTime)
     {
+        if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            ScreenManager.ShowScreen(new TilemapGameScreen("maps/island"));
     }
 
     public override void Draw(GameTime gameTime)

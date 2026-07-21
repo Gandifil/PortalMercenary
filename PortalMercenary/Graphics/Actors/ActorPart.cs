@@ -42,13 +42,13 @@ public class ActorPart
             sprite.Cut(direction);
         var reversed = Sprites[(int)_actor.Direction].GetReversed();
         var impulse = new Vector2(Random.Shared.Next(-100, 100),  Random.Shared.Next(-100, 100));
-        G.Game.CharacterManager.Add(new Slice(reversed, GlobalPosition, impulse, 100f));
+        G.Screen.CharacterManager.Add(new Slice(reversed, GlobalPosition, impulse, 100f));
     }
 
     public void Detach()
     {
         var impulse = new Vector2(Random.Shared.Next(-100, 100),  Random.Shared.Next(-100, 100));
-        G.Game.CharacterManager.Add(new Slice(Sprites[(int)_actor.Direction], GlobalPosition, impulse, 100f));
+        G.Screen.CharacterManager.Add(new Slice(Sprites[(int)_actor.Direction], GlobalPosition, impulse, 100f));
         IsDetached = true;
     }
 }

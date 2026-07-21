@@ -70,11 +70,11 @@ public class Character: Entity
                 duration: .1f,  
                 delay: 0)
             .Easing(EasingFunctions.ElasticOut);
-        G.Game.DecalsComponent.Add(Position);
+        G.Screen.DecalsComponent.Add(Position);
         G.Content.Sounds[_options.DamageSounds[Random.Shared.Next(_options.DamageSounds.Length)]].Play(.25f, 0, 1);
 
         // Создаем эффект крови
-        G.Game.BloodManager.SpawnBlood(Position, pos);
+        G.Screen.BloodManager.SpawnBlood(Position, pos);
 
         Actor.CutAnything();
     }

@@ -13,13 +13,15 @@ using MonoGame.Extended.Tilemaps;
 using MonoGame.Extended.Tilemaps.Rendering;
 using PortalMercenary.Game;
 using PortalMercenary.Game.Controllers;
+using PortalMercenary.Graphics;
+using PortalMercenary.Graphics.Animations;
 using PortalMercenary.Utils;
 
 namespace PortalMercenary.Screens;
 
 public class TilemapGameScreen: GameScreen
 {
-    public const float MAX_TIME = 60;
+    public const float MAX_TIME = 20;
     
     private readonly string _mapName;
     private readonly TilemapSpriteBatchRenderer _renderer;
@@ -28,6 +30,14 @@ public class TilemapGameScreen: GameScreen
     public static Character Player { get; private set; }
 
     public CollisionWorld2D CollisionWorld { get; private set; }
+    
+    public CharacterManager CharacterManager { get; private set; }
+
+    public DecalsComponent DecalsComponent { get; private set; }
+    
+    public TempAnimatedSpriteComponent Animations { get; private set; }
+    
+    public BloodManager BloodManager { get; private set; }
     
     private Tilemap _tilemap;
     private SpriteFont _font;
@@ -42,6 +52,14 @@ public class TilemapGameScreen: GameScreen
         G.Init2(this);
     }
 
+    public override void Initialize()
+    {
+        G.Game.Components.Add(DecalsComponent = new DecalsComponent(100));
+        G.Game.Components.Add(Animations = new TempAnimatedSpriteComponent(G.Game));
+        G.Game.Components.Add(BloodManager = new BloodManager());
+        G.Game.Components.Add(CharacterManager = new CharacterManager(G.Game));
+    }
+
     public override void LoadContent()
     {
         base.LoadContent();
@@ -53,14 +71,14 @@ public class TilemapGameScreen: GameScreen
         
         var spawnPoints = _tilemap.Layers["spawners"] as TilemapObjectLayer ?? throw new Exception("spawners not found");
 
-        var spawner = G.Game.CharacterManager.GetSpawner();
+        var spawner = CharacterManager.GetSpawner();
         Player = spawner
             .WithPosition(spawnPoints.Objects[0].Position)
             .WithController(new PlayerController())
             .Spawn("player")
             .Last();
 
-        G.Game.CharacterManager.CharacterRemoved += () => _gameStats.Kills++;
+        CharacterManager.CharacterRemoved += () => _gameStats.Kills++;
         CoroutineHandler.Start(Spawn(spawner, 
             spawnPoints.Objects.Where(x => x.Id != 1).Select(x => x.Position).ToArray()));
     }
@@ -81,13 +99,6 @@ public class TilemapGameScreen: GameScreen
             }
         }
     }
-
-    public override void UnloadContent()
-    {
-        base.UnloadContent();
-        
-        Content.UnloadAsset(_tilemap.Name);
-    }
     
     public override void Update(GameTime gameTime)
     {
@@ -97,7 +108,7 @@ public class TilemapGameScreen: GameScreen
             _gameStats.IsWin = true;
             G.Game.ScreenManager.ReplaceScreen(
                 new ResultGameScreen(_gameStats), 
-                new FadeTransition(G.Game.GraphicsDevice, Color.Black));
+                new FadeTransition(G.Game.GraphicsDevice, ResultGameScreen.BACKGROUND_COLOR,5f));
         }
         _renderer.Update(gameTime);
         G.Game.Camera.LookAt(Player.Position);
@@ -113,5 +124,15 @@ public class TilemapGameScreen: GameScreen
         _spriteBatch.DrawString(_font, $"SURVIVE! {time / 60}:{time % 60} REMAINING", new Vector2(10, 10), Color.White);
         _spriteBatch.DrawString(_font, $"YOU MADE {_gameStats.Kills} KILLS", new Vector2(10, 50), Color.White);
         _spriteBatch.End();
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+        
+        G.Game.Components.Remove(DecalsComponent);
+        G.Game.Components.Remove(Animations);
+        G.Game.Components.Remove(BloodManager);
+        G.Game.Components.Remove(CharacterManager);
     }
 }

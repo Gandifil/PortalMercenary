@@ -47,7 +47,7 @@ public class AttackProcessor
         }
         
         actor.Start(anim);
-        G.Game.Animations.Spawn(_contentSpritesheet, "Attack", globalPosition, rotation);
+        G.Screen.Animations.Spawn(_contentSpritesheet, "Attack", globalPosition, rotation);
         _contentSound.Play();
     }
 
